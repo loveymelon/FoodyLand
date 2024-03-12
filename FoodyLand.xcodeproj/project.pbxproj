@@ -44,6 +44,10 @@
 		DF82E89F2B9A216200838549 /* ReusableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82E89E2B9A216200838549 /* ReusableProtocol.swift */; };
 		DF82E8A12B9A220900838549 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82E8A02B9A220900838549 /* UIView+Extension.swift */; };
 		DF836CEB2B9DB0AC0036649C /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF836CEA2B9DB0AC0036649C /* SearchCollectionViewCell.swift */; };
+		DF836CEE2B9E175E0036649C /* CustomDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF836CED2B9E175E0036649C /* CustomDetailViewController.swift */; };
+		DF836CF02B9E17A90036649C /* CustomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF836CEF2B9E17A90036649C /* CustomDetailView.swift */; };
+		DF836CF32B9E188E0036649C /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = DF836CF22B9E188E0036649C /* Cosmos */; };
+		DF836CF82B9F17BD0036649C /* MarketDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF836CF72B9F17BD0036649C /* MarketDetailView.swift */; };
 		DF84A05B2B9CD36C00B6601F /* UISearchBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF84A05A2B9CD36C00B6601F /* UISearchBar+Extension.swift */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +82,9 @@
 		DF82E89E2B9A216200838549 /* ReusableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableProtocol.swift; sourceTree = "<group>"; };
 		DF82E8A02B9A220900838549 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		DF836CEA2B9DB0AC0036649C /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		DF836CED2B9E175E0036649C /* CustomDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDetailViewController.swift; sourceTree = "<group>"; };
+		DF836CEF2B9E17A90036649C /* CustomDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDetailView.swift; sourceTree = "<group>"; };
+		DF836CF72B9F17BD0036649C /* MarketDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDetailView.swift; sourceTree = "<group>"; };
 		DF84A05A2B9CD36C00B6601F /* UISearchBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF836CF32B9E188E0036649C /* Cosmos in Frameworks */,
 				DF6A01C92B9B51230047E4B0 /* Alamofire in Frameworks */,
 				DF71CA112B999BC200D5983C /* Then in Frameworks */,
 				DF3D88782B99A2460000C3C9 /* FirebaseMessaging in Frameworks */,
@@ -154,6 +162,7 @@
 		DF71C9E42B999A0900D5983C /* FoodyLand */ = {
 			isa = PBXGroup;
 			children = (
+				DF836CF62B9F177B0036649C /* CustomView */,
 				DF0542712B9B4E50009BC6AB /* Network */,
 				DF05423F2B9B04EE009BC6AB /* GoogleService-Info.plist */,
 				DF17093E2B99BF44002594AF /* Extension */,
@@ -184,6 +193,7 @@
 		DF71C9FC2B999AA800D5983C /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				DF836CEC2B9E17280036649C /* CustomDetailScene */,
 				DF7D469D2B9C796C00C76C1F /* SearchScene */,
 				DF71C9FD2B999AB200D5983C /* FoodyMap */,
 			);
@@ -234,6 +244,23 @@
 			path = SearchScene;
 			sourceTree = "<group>";
 		};
+		DF836CEC2B9E17280036649C /* CustomDetailScene */ = {
+			isa = PBXGroup;
+			children = (
+				DF836CED2B9E175E0036649C /* CustomDetailViewController.swift */,
+				DF836CEF2B9E17A90036649C /* CustomDetailView.swift */,
+			);
+			path = CustomDetailScene;
+			sourceTree = "<group>";
+		};
+		DF836CF62B9F177B0036649C /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				DF836CF72B9F17BD0036649C /* MarketDetailView.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -261,6 +288,7 @@
 				DF3D88752B99A2460000C3C9 /* FirebaseCrashlytics */,
 				DF3D88772B99A2460000C3C9 /* FirebaseMessaging */,
 				DF6A01C82B9B51230047E4B0 /* Alamofire */,
+				DF836CF22B9E188E0036649C /* Cosmos */,
 			);
 			productName = FoodyLand;
 			productReference = DF71C9E22B999A0900D5983C /* FoodyLand.app */;
@@ -297,6 +325,7 @@
 				DF71CA1A2B999BFB00D5983C /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				DF3D88722B99A2460000C3C9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				DF6A01C72B9B51230047E4B0 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				DF836CF12B9E188E0036649C /* XCRemoteSwiftPackageReference "Cosmos" */,
 			);
 			productRefGroup = DF71C9E32B999A0900D5983C /* Products */;
 			projectDirPath = "";
@@ -352,6 +381,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF836CEE2B9E175E0036649C /* CustomDetailViewController.swift in Sources */,
+				DF836CF82B9F17BD0036649C /* MarketDetailView.swift in Sources */,
 				DF733C862B9D50D600CC0B93 /* NetworkManager.swift in Sources */,
 				DF82E89D2B9A1DB000838549 /* FoodyMapMarker.swift in Sources */,
 				DF733C822B9D46C600CC0B93 /* SearchViewController.swift in Sources */,
@@ -365,6 +396,7 @@
 				DF17094A2B99E502002594AF /* SearchViewModel.swift in Sources */,
 				DF71CA042B999AEB00D5983C /* BaseView.swift in Sources */,
 				DF733C802B9D46BA00CC0B93 /* SearchView.swift in Sources */,
+				DF836CF02B9E17A90036649C /* CustomDetailView.swift in Sources */,
 				DF1709482B99E4E8002594AF /* Observable.swift in Sources */,
 				DF836CEB2B9DB0AC0036649C /* SearchCollectionViewCell.swift in Sources */,
 				DF84A05B2B9CD36C00B6601F /* UISearchBar+Extension.swift in Sources */,
@@ -657,6 +689,14 @@
 				minimumVersion = 5.1.0;
 			};
 		};
+		DF836CF12B9E188E0036649C /* XCRemoteSwiftPackageReference "Cosmos" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/Cosmos.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 25.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -704,6 +744,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DF71CA1A2B999BFB00D5983C /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
+		};
+		DF836CF22B9E188E0036649C /* Cosmos */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DF836CF12B9E188E0036649C /* XCRemoteSwiftPackageReference "Cosmos" */;
+			productName = Cosmos;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class SearchView: BaseView {
+final class SearchView: BaseView {
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
 
@@ -34,7 +34,7 @@ class SearchView: BaseView {
 }
 
 extension SearchView {
-    static func createLayout() -> UICollectionViewLayout {
+    private static func createLayout() -> UICollectionViewLayout {
         var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
         
         configuration.backgroundColor = .customYellow

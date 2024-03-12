@@ -77,7 +77,7 @@ extension SearchViewController {
         // enter를 칠때마다 snapShot을 새로만들고 Diffable에 적용해야된다.
         var snapshot = NSDiffableDataSourceSnapshot<Section, Address>()
         
-        snapshot.appendSections([.search])
+        snapshot.appendSections(Section.allCases)
         snapshot.appendItems(value)
         
         dataSource?.apply(snapshot, animatingDifferences: true)

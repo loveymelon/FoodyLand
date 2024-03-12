@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: scene)
         
-        let nav = UINavigationController(rootViewController: FoodyMapViewController())
+        let nav = UINavigationController(rootViewController: CustomDetailViewController())
         
         window?.rootViewController = nav
         
