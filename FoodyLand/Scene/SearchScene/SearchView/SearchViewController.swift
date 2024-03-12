@@ -42,6 +42,7 @@ final class SearchViewController: BaseViewController<SearchView> {
     override func dataSourceDelegate() {
         searchController.searchBar.delegate = self
         mainView.collectionView.prefetchDataSource = self
+        mainView.collectionView.delegate = self
     }
     
     override func bindData() {
@@ -88,6 +89,18 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         // 소켓 통신은 추후 업데이트
         searchViewModel.inputSearchText.value = searchBar.text
+    }
+}
+
+extension SearchViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = CustomDetailViewController()
+        
+        guard let data = dataSource?.itemIdentifier(for: indexPath) else { return }
+        
+        vc.customDetailViewModel.inoutputDetailData.value = data
+        print("tapped")
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

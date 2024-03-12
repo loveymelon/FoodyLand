@@ -13,16 +13,13 @@ class MarketDetailView: BaseView {
 
     let marketImageView = UIImageView().then {
         $0.image = UIImage(systemName: "star")
-        $0.backgroundColor = .red
     }
     
     let marketTitleImageView = UIImageView().then {
         $0.image = UIImage(systemName: "star")
-        $0.backgroundColor = .yellow
     }
     
     let marketTitleLabel = UILabel().then {
-        $0.backgroundColor = .red
         $0.text = "aaa"
         $0.textAlignment = .center
         $0.font = .boldSystemFont(ofSize: 20)
@@ -33,19 +30,16 @@ class MarketDetailView: BaseView {
         $0.alignment = .center
         $0.spacing = 10
         $0.distribution = .equalSpacing
-        $0.backgroundColor = .darkGray
     }
     
     let marketURLImageView = UIImageView().then {
         $0.image = UIImage(systemName: "star")
-        $0.backgroundColor = .yellow
     }
     
     let marketURLLabel = UILabel().then {
-        $0.backgroundColor = .red
         $0.text = "aaa"
         $0.textAlignment = .center
-        $0.font = .boldSystemFont(ofSize: 20)
+        $0.font = .boldSystemFont(ofSize: 16)
     }
     
     let marketURLStackView = UIStackView().then {
@@ -53,7 +47,6 @@ class MarketDetailView: BaseView {
         $0.alignment = .center
         $0.spacing = 10
         $0.distribution = .equalSpacing
-        $0.backgroundColor = .orange
     }
     
     let marketAddImageView = UIImageView().then {
@@ -61,7 +54,6 @@ class MarketDetailView: BaseView {
     }
     
     let marketAddLabel = UILabel().then {
-        $0.backgroundColor = .red
         $0.text = "aaa"
         $0.textAlignment = .center
         $0.font = .boldSystemFont(ofSize: 20)
@@ -72,7 +64,6 @@ class MarketDetailView: BaseView {
         $0.alignment = .center
         $0.spacing = 10
         $0.distribution = .equalSpacing
-        $0.backgroundColor = .darkGray
     }
     
     let marketDetailStackView = UIStackView().then {
@@ -80,7 +71,6 @@ class MarketDetailView: BaseView {
         $0.alignment = .leading
         $0.spacing = 5
         $0.distribution = .equalSpacing
-        $0.backgroundColor = .gray
     }
     
     override init(frame: CGRect) {
@@ -121,7 +111,7 @@ class MarketDetailView: BaseView {
         }
         
         marketTitleImageView.snp.makeConstraints { make in
-            make.size.equalTo(20)
+            make.size.equalTo(30)
         }
         
         marketTitleLabel.snp.makeConstraints { make in
@@ -134,7 +124,7 @@ class MarketDetailView: BaseView {
         }
         
         marketURLImageView.snp.makeConstraints { make in
-            make.size.equalTo(20)
+            make.size.equalTo(30)
         }
         
         marketURLLabel.snp.makeConstraints { make in
@@ -147,7 +137,7 @@ class MarketDetailView: BaseView {
         }
         
         marketAddImageView.snp.makeConstraints { make in
-            make.size.equalTo(20)
+            make.size.equalTo(30)
         }
         
         marketAddLabel.snp.makeConstraints { make in

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF01C69A2BA0501300BBA5D3 /* CustomDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF01C6992BA0501300BBA5D3 /* CustomDetailViewModel.swift */; };
+		DF01C69D2BA0598E00BBA5D3 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = DF01C69C2BA0598E00BBA5D3 /* FSCalendar */; };
 		DF0542402B9B04EE009BC6AB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DF05423F2B9B04EE009BC6AB /* GoogleService-Info.plist */; };
 		DF0542702B9B34B4009BC6AB /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF05426F2B9B34B4009BC6AB /* CustomAnnotationView.swift */; };
 		DF1709402B99BF55002594AF /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF17093F2B99BF55002594AF /* UIViewController+Extension.swift */; };
@@ -52,6 +54,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DF01C6992BA0501300BBA5D3 /* CustomDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDetailViewModel.swift; sourceTree = "<group>"; };
 		DF05423F2B9B04EE009BC6AB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DF05426F2B9B34B4009BC6AB /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
 		DF17093F2B99BF55002594AF /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -103,12 +106,30 @@
 				DF71CA1C2B999BFB00D5983C /* Toast in Frameworks */,
 				DF3D88762B99A2460000C3C9 /* FirebaseCrashlytics in Frameworks */,
 				DF3D88742B99A2460000C3C9 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				DF01C69D2BA0598E00BBA5D3 /* FSCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DF01C6972BA04FE400BBA5D3 /* CustomDetailSceneViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DF01C6992BA0501300BBA5D3 /* CustomDetailViewModel.swift */,
+			);
+			path = CustomDetailSceneViewModel;
+			sourceTree = "<group>";
+		};
+		DF01C6982BA04FF700BBA5D3 /* CustomDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				DF836CED2B9E175E0036649C /* CustomDetailViewController.swift */,
+				DF836CEF2B9E17A90036649C /* CustomDetailView.swift */,
+			);
+			path = CustomDetailView;
+			sourceTree = "<group>";
+		};
 		DF0542712B9B4E50009BC6AB /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,8 +268,8 @@
 		DF836CEC2B9E17280036649C /* CustomDetailScene */ = {
 			isa = PBXGroup;
 			children = (
-				DF836CED2B9E175E0036649C /* CustomDetailViewController.swift */,
-				DF836CEF2B9E17A90036649C /* CustomDetailView.swift */,
+				DF01C6982BA04FF700BBA5D3 /* CustomDetailView */,
+				DF01C6972BA04FE400BBA5D3 /* CustomDetailSceneViewModel */,
 			);
 			path = CustomDetailScene;
 			sourceTree = "<group>";
@@ -289,6 +310,7 @@
 				DF3D88772B99A2460000C3C9 /* FirebaseMessaging */,
 				DF6A01C82B9B51230047E4B0 /* Alamofire */,
 				DF836CF22B9E188E0036649C /* Cosmos */,
+				DF01C69C2BA0598E00BBA5D3 /* FSCalendar */,
 			);
 			productName = FoodyLand;
 			productReference = DF71C9E22B999A0900D5983C /* FoodyLand.app */;
@@ -326,6 +348,7 @@
 				DF3D88722B99A2460000C3C9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				DF6A01C72B9B51230047E4B0 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				DF836CF12B9E188E0036649C /* XCRemoteSwiftPackageReference "Cosmos" */,
+				DF01C69B2BA0598E00BBA5D3 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = DF71C9E32B999A0900D5983C /* Products */;
 			projectDirPath = "";
@@ -389,6 +412,7 @@
 				DF82E8A12B9A220900838549 /* UIView+Extension.swift in Sources */,
 				DF1709402B99BF55002594AF /* UIViewController+Extension.swift in Sources */,
 				DF7D469F2B9CC1B100C76C1F /* String+Extension.swift in Sources */,
+				DF01C69A2BA0501300BBA5D3 /* CustomDetailViewModel.swift in Sources */,
 				DF6A01D12B9B65640047E4B0 /* KeywordModel.swift in Sources */,
 				DF82E89F2B9A216200838549 /* ReusableProtocol.swift in Sources */,
 				DF71CA022B999ADA00D5983C /* FoodyMapViewController.swift in Sources */,
@@ -641,6 +665,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DF01C69B2BA0598E00BBA5D3 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.4;
+			};
+		};
 		DF3D88722B99A2460000C3C9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -700,6 +732,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		DF01C69C2BA0598E00BBA5D3 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DF01C69B2BA0598E00BBA5D3 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
 		DF3D88732B99A2460000C3C9 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DF3D88722B99A2460000C3C9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
