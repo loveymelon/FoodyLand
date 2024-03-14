@@ -11,11 +11,6 @@ import Then
 
 final class CustomAnnotationView: MKAnnotationView {
     
-    let backView = UIView().then {
-        $0.backgroundColor = .white
-        $0.layer.cornerRadius = 10
-    }
-    
     let imageView = UIImageView()
     
     override init(annotation: (any MKAnnotation)?, reuseIdentifier: String?) {
@@ -28,25 +23,32 @@ final class CustomAnnotationView: MKAnnotationView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        imageView.image = nil
-    }
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//        
+//        imageView.image = nil
+//    }
     
     override func prepareForDisplay() {
         super.prepareForDisplay()
         
+        // 현재 위치 표시(점)도 일종에 어노테이션이기 때문에, 이 처리를 안하게 되면, 유저 위치 어노테이션도 변경 된다.
         guard let annotation = annotation as? FoodyMapMarker else { return }
         
         //            guard let imageName = annotation.imageName,
         //                  let image = UIImage(named: imageName) else { return }
         
-        imageView.image = UIImage(named: "noun-fork-1550323")
+        imageView.image = .restaurant
         
         setNeedsLayout()
         
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        centerOffset = CGPoint(x: -25, y: -30)
+    } // layoutSubViews에 왜 선언을 하는 걸까?
     
 }
 
@@ -57,18 +59,14 @@ extension CustomAnnotationView: ConfigureUIProtocol {
     }
     
     func configureHierarchy() {
-        self.addSubview(backView)
-        self.backView.addSubview(imageView)
+        self.addSubview(imageView)
     }
     
     func configureLayout() {
-        self.backView.snp.makeConstraints { make in
+        
+        self.imageView.snp.makeConstraints { make in
             make.width.height.equalTo(50)
         }
         
-        self.imageView.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-            make.edges.equalToSuperview().inset(5)
-        }
     }
 }

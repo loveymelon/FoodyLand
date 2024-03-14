@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "noun-fork-1550323.png",
+      "filename" : "restaurantImage.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "restaurantImage@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "restaurantImage@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

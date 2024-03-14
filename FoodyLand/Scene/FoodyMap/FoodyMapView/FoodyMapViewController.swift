@@ -17,18 +17,34 @@ enum UnknownError: Error {
 final class FoodyMapViewController: BaseViewController<FoodyMapView> {
     
     private var locationManager = CLLocationManager()
+    let foodyMapViewModel = FoodyMapViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         checkDeviceLocationAuthorization()
-        
     }
     
     override func dataSourceDelegate() {
         self.locationManager.delegate = self
         mainView.searchBar.delegate = self
         mainView.mapView.delegate = self
+    }
+    
+    override func bindData() {
+        foodyMapViewModel.outputLocationValue.bind { result in
+            
+            if result.isEmpty {
+                return
+            }
+            
+            let location = CLLocationCoordinate2D(latitude: result[1], longitude: result[0])
+            
+            print(result)
+            let chang = FoodyMapMarker(title: "ddd", coordinate: location)
+            
+            self.mainView.mapView.addAnnotation(chang)
+        }
     }
 
 }
@@ -73,8 +89,9 @@ extension FoodyMapViewController {
         case .denied:
             // 거절될때는 미리 준비된 좌표로 보여준다.
             showLocationSettingAlert()
-            let coordinate = CLLocationCoordinate2D(latitude: 37.654165, longitude: 127.049696)
+            let coordinate = CLLocationCoordinate2D(latitude: 37.566685, longitude: 126.978400)
             setRegionAndAnnotation(center: coordinate)
+            locationManager.stopUpdatingLocation()
         case .restricted:
             // 안심자녀
             showLocationSettingAlert()
@@ -110,13 +127,22 @@ extension FoodyMapViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print(locations)
+        print("location", locations[0].coordinate)
+        guard let locationLast = locations.last?.coordinate else { 
+            manager.stopUpdatingLocation()
+            return
+        }
+        
+        mainView.myLocation(latitude: locationLast.latitude, longitude: locationLast.longitude)
     }
+    
 }
 
 extension FoodyMapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: any MKAnnotation) -> MKAnnotationView? {
         
+        guard !(annotation is MKUserLocation) else { return nil } // 유저의 위치 어노테이션의 모양이 변경되는 것을 방지
+    
         var view: MKMarkerAnnotationView
         
         // filemanager 이미지가 없다면 기본 이미지

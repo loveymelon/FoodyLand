@@ -44,7 +44,7 @@ final class CustomDetailView: BaseView {
         return button
     }()
     
-    private let calendarLabel = UILabel().then {
+    let calendarLabel = UILabel().then {
         $0.textAlignment = .center
         $0.text = "날짜"
     }
@@ -118,6 +118,7 @@ final class CustomDetailView: BaseView {
         self.addSubview(memoLabel)
         self.addSubview(memoTextView)
         self.addSubview(saveButton)
+        
     }
     
     override func configureLayout() {
@@ -137,20 +138,21 @@ final class CustomDetailView: BaseView {
         
         starStackView.snp.makeConstraints { make in
             make.width.equalTo(self.otherDetailStackView.snp.width)
+
         }
         
         calendarButton.snp.makeConstraints { make in
-            make.height.equalTo(30)
-            make.width.equalTo(30)
+            make.size.equalTo(30)
         }
         
         calendarLabel.snp.makeConstraints { make in
             make.height.equalTo(self.calendarButton.snp.height)
-            make.width.equalTo(self.calendarStackView.snp.width).multipliedBy(0.9)
+            make.width.equalTo(self.calendarStackView.snp.width).multipliedBy(0.8)
         }
         
         calendarStackView.snp.makeConstraints { make in
             make.width.equalTo(self.otherDetailStackView.snp.width)
+            
         }
         
         otherDetailStackView.snp.makeConstraints { make in
@@ -171,7 +173,6 @@ final class CustomDetailView: BaseView {
         
         memoTextView.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(self.safeAreaLayoutGuide).inset(20)
-//            make.height.equalTo(self.memoTextView.snp.width).multipliedBy(0.5)
             make.top.equalTo(self.memoLabel.snp.bottom).offset(5)
             make.bottom.equalTo(self.saveButton.snp.top).offset(-10)
         }

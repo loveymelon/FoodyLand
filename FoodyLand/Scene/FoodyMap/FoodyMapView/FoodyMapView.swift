@@ -14,24 +14,12 @@ import Then
 final class FoodyMapView: BaseView {
     
     lazy var mapView = MKMapView(frame: .zero).then {
-        let location = CLLocationCoordinate2D(latitude: 37.654165, longitude: 127.049696)
-        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01) // 지역 범위의 폭과 너비
-        let region = MKCoordinateRegion(center: location, span: span)
-//        let chang = FoodyMapMarker(title: "ddd", coordinate: location)
         
-//        $0.addAnnotation(chang)
         $0.mapType = .standard // 다시 실행했을때 오류 방지
         $0.showsUserLocation = true // 지도에 내 위치 표시
         $0.setUserTrackingMode(.follow, animated: true) // 현재 내 위치 기준으로 지도 움직이기
-        $0.setRegion(region, animated: true)
         $0.backgroundColor = .red
         $0.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: CustomAnnotationView.identifier)
-        
-        let myLongPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer()
-        myLongPress.addTarget(self, action: #selector(recognizeLongPress))
-        
-        // Added UIGestureRecognizer to MapView.
-        $0.addGestureRecognizer(myLongPress)
     }
     
     let searchBar = UISearchBar().then {
@@ -73,27 +61,14 @@ final class FoodyMapView: BaseView {
         
     }
     
-    @objc func recognizeLongPress(sender: UILongPressGestureRecognizer) {
+}
+
+extension FoodyMapView {
+    func myLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+        let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        let span = MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
+        let region = MKCoordinateRegion(center: location, span: span)
         
-        if sender.state == .ended {
-            return
-        }
-        
-        let annotations = mapView.annotations
-        
-        mapView.removeAnnotations(annotations)
-        
-        if sender.state == .began {
-            let location = sender.location(in: mapView) // 맵 뷰의 포인트를 얻고
-            
-            let locationOnMap = mapView.convert(location, toCoordinateFrom: mapView) // 그 포인트를 맵 뷰 기준으로 위도 경도를 얻음
-            
-//            longPressClosure?(locationOnMap)
-            let chang = FoodyMapMarker(title: "ghgh", coordinate: locationOnMap)
-            self.mapView.addAnnotation(chang)
-            print(#function)
-            
-        }
-        
+        mapView.setRegion(region, animated: true)
     }
 }

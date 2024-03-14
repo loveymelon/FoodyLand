@@ -116,7 +116,7 @@ class MarketDetailView: BaseView {
         
         marketTitleLabel.snp.makeConstraints { make in
             make.height.equalTo(self.marketTitleImageView.snp.height)
-            make.width.equalTo(self.marketTitleStackView.snp.width).multipliedBy(0.9)
+            make.width.equalTo(self.marketTitleStackView.snp.width).multipliedBy(0.8)
         }
         
         marketTitleStackView.snp.makeConstraints { make in
@@ -129,7 +129,7 @@ class MarketDetailView: BaseView {
         
         marketURLLabel.snp.makeConstraints { make in
             make.height.equalTo(self.marketURLImageView.snp.height)
-            make.width.equalTo(self.marketURLStackView.snp.width).multipliedBy(0.9)
+            make.width.equalTo(self.marketURLStackView.snp.width).multipliedBy(0.8)
         }
         
         marketURLStackView.snp.makeConstraints { make in
@@ -142,7 +142,7 @@ class MarketDetailView: BaseView {
         
         marketAddLabel.snp.makeConstraints { make in
             make.height.equalTo(self.marketAddImageView.snp.height)
-            make.width.equalTo(self.marketAddStackView.snp.width).multipliedBy(0.9)
+            make.width.equalTo(self.marketAddStackView.snp.width).multipliedBy(0.8)
         }
         
         marketAddStackView.snp.makeConstraints { make in
