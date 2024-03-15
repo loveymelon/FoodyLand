@@ -12,11 +12,11 @@ import Then
 class MarketDetailView: BaseView {
 
     let marketImageView = UIImageView().then {
-        $0.image = UIImage(systemName: "star")
+        $0.image = .basic
     }
     
     let marketTitleImageView = UIImageView().then {
-        $0.image = UIImage(systemName: "star")
+        $0.image = .home
     }
     
     let marketTitleLabel = UILabel().then {
@@ -33,7 +33,7 @@ class MarketDetailView: BaseView {
     }
     
     let marketURLImageView = UIImageView().then {
-        $0.image = UIImage(systemName: "star")
+        $0.image = .global
     }
     
     let marketURLLabel = UILabel().then {
@@ -50,7 +50,7 @@ class MarketDetailView: BaseView {
     }
     
     let marketAddImageView = UIImageView().then {
-        $0.image = UIImage(systemName: "star")
+        $0.image = .location
     }
     
     let marketAddLabel = UILabel().then {
@@ -75,6 +75,8 @@ class MarketDetailView: BaseView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        self.backgroundColor = .customYellow
     }
     
     required init?(coder: NSCoder) {

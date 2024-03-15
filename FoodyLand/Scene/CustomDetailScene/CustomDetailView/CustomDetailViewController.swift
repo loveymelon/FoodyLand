@@ -15,6 +15,7 @@ final class CustomDetailViewController: BaseViewController<CustomDetailView> {
     
     lazy var fpVC = FloatingPanelController().then {
         let calendarVC = CalendarViewController() // 이렇게 되면 CustomDetailViewController이 메모리에 올라올때 같이 올라온다 이걸 어떻게 수정할지 고민해보자
+        calendarVC.delegate = self
         $0.set(contentViewController: calendarVC)
         $0.isRemovalInteractionEnabled = true
         $0.layout = MyFloatingPanelLayout()
@@ -39,7 +40,7 @@ final class CustomDetailViewController: BaseViewController<CustomDetailView> {
         
         customDetailViewModel.outputCalendarData.bind { [weak self] result in
             guard let self = self else { return }
-            
+            guard !result.isEmpty else { return }
             mainView.calendarLabel.text = result
         }
     }
@@ -91,6 +92,7 @@ extension CustomDetailViewController: FloatingPanelControllerDelegate {
 
 extension CustomDetailViewController: CalendarDataDelegate {
     func selectedDate(date: Date) {
+        print(date)
         customDetailViewModel.inputCalendarData.value = date
     }
 }

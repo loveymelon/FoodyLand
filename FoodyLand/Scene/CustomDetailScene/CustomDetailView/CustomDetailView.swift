@@ -21,11 +21,13 @@ final class CustomDetailView: BaseView {
     }
     
     private let starView = CosmosView().then {
-        $0.settings.fillMode = .half
+        $0.settings.fillMode = .full
         $0.settings.starSize = 30
         $0.settings.starMargin = 5
-        $0.text = "2.5"
+        $0.text = "3"
         $0.settings.starMargin = 10
+        $0.settings.filledImage = .rice
+        $0.settings.emptyImage = .dish
     }
     
     private let starStackView = UIStackView().then {
@@ -37,7 +39,7 @@ final class CustomDetailView: BaseView {
     
     let calendarButton: UIButton = {
         var buttonConfig = UIButton.Configuration.plain()
-        buttonConfig.image = UIImage(systemName: "calendar")
+        buttonConfig.image = .calendar
         
         let button = UIButton(configuration: buttonConfig)
         
@@ -46,7 +48,7 @@ final class CustomDetailView: BaseView {
     
     let calendarLabel = UILabel().then {
         $0.textAlignment = .center
-        $0.text = "날짜"
+        $0.text = Date().toString()
     }
     
     let lineView = UIView().then {
@@ -55,15 +57,14 @@ final class CustomDetailView: BaseView {
     
     let categoryButton: UIButton = {
         var buttonConfig = UIButton.Configuration.plain()
-        buttonConfig.image = UIImage(systemName: "square.split.2x2.fill")
+        buttonConfig.image = .category
         
         let button = UIButton(configuration: buttonConfig)
-        button.backgroundColor = .blue
         return button
     }()
     
     let categoryLabel = UILabel().then {
-        $0.text = "aassssssss10"
+        $0.text = "카테고리"
     }
     
     private let calendarStackView = UIStackView().then {
@@ -89,11 +90,13 @@ final class CustomDetailView: BaseView {
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.lightGray.cgColor
         $0.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 0)
+        
     }
     
     let saveButton: UIButton = {
         var buttonConfig = UIButton.Configuration.filled()
         buttonConfig.title = "저장"
+        buttonConfig.baseBackgroundColor = .customOrange
         let button = UIButton(configuration: buttonConfig)
         
         button.layer.cornerRadius = 10
@@ -114,6 +117,7 @@ final class CustomDetailView: BaseView {
         super.configureUI()
         
         starViewSetting()
+        self.backgroundColor = .customYellow
     }
     
     override func configureHierarchy() {

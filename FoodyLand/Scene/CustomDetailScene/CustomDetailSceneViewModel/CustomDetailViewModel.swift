@@ -25,5 +25,6 @@ class CustomDetailViewModel {
     
     private func convertCalendarData(date: Date) {
         outputCalendarData.value = date.toString()
+        print(outputCalendarData.value, date)
     }
 }
