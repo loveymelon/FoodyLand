@@ -11,7 +11,7 @@ import Then
 
 // 서치 화면에 아무것도 없을때 화면 구성하고 cellConfigure따로 빼기 오늘은 공수산정 꼭 정하자
 
-class CustomDetailViewController: BaseViewController<CustomDetailView> {
+final class CustomDetailViewController: BaseViewController<CustomDetailView> {
     
     lazy var fpVC = FloatingPanelController().then {
         let calendarVC = CalendarViewController() // 이렇게 되면 CustomDetailViewController이 메모리에 올라올때 같이 올라온다 이걸 어떻게 수정할지 고민해보자
@@ -66,6 +66,18 @@ extension CustomDetailViewController {
             
             self.navigationController?.popToRootViewController(animated: true)
         }), for: .touchUpInside)
+        
+        mainView.categoryButton.addAction(UIAction(handler: { [weak self] _ in
+            guard let self else { return }
+            
+            let categoryVC = CategoryViewController()
+            
+            categoryVC.delegate = self
+            categoryVC.modalPresentationStyle = .automatic
+            
+            self.present(categoryVC, animated: true)
+            
+        }), for: .touchUpInside)
     }
     
 }
@@ -80,5 +92,11 @@ extension CustomDetailViewController: FloatingPanelControllerDelegate {
 extension CustomDetailViewController: CalendarDataDelegate {
     func selectedDate(date: Date) {
         customDetailViewModel.inputCalendarData.value = date
+    }
+}
+
+extension CustomDetailViewController: CategoryDataDelegate {
+    func passCategoryData(res: String) {
+        mainView.categoryLabel.text = res
     }
 }

@@ -35,7 +35,7 @@ final class CustomDetailView: BaseView {
         $0.distribution = .fillProportionally
     }
     
-    var calendarButton: UIButton = {
+    let calendarButton: UIButton = {
         var buttonConfig = UIButton.Configuration.plain()
         buttonConfig.image = UIImage(systemName: "calendar")
         
@@ -49,10 +49,27 @@ final class CustomDetailView: BaseView {
         $0.text = "날짜"
     }
     
+    let lineView = UIView().then {
+        $0.backgroundColor = .black
+    }
+    
+    let categoryButton: UIButton = {
+        var buttonConfig = UIButton.Configuration.plain()
+        buttonConfig.image = UIImage(systemName: "square.split.2x2.fill")
+        
+        let button = UIButton(configuration: buttonConfig)
+        button.backgroundColor = .blue
+        return button
+    }()
+    
+    let categoryLabel = UILabel().then {
+        $0.text = "aassssssss10"
+    }
+    
     private let calendarStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.alignment = .center
-        $0.spacing = 10
+        $0.spacing = 5
         $0.distribution = .equalSpacing
     }
     
@@ -106,7 +123,7 @@ final class CustomDetailView: BaseView {
             starStackView.addArrangedSubview(items)
         }
         
-        [calendarButton, calendarLabel].forEach { items in
+        [calendarButton, calendarLabel, lineView, categoryButton, categoryLabel].forEach { items in
             calendarStackView.addArrangedSubview(items)
         }
         
@@ -147,7 +164,21 @@ final class CustomDetailView: BaseView {
         
         calendarLabel.snp.makeConstraints { make in
             make.height.equalTo(self.calendarButton.snp.height)
-            make.width.equalTo(self.calendarStackView.snp.width).multipliedBy(0.8)
+            make.width.equalTo(self.calendarStackView.snp.width).multipliedBy(0.3)
+        }
+        
+        lineView.snp.makeConstraints { make in
+            make.height.equalTo(calendarButton.snp.height)
+            make.width.equalTo(1)
+        }
+        
+        categoryButton.snp.makeConstraints { make in
+            make.size.equalTo(calendarButton.snp.size)
+        }
+        
+        categoryLabel.snp.makeConstraints { make in
+            make.height.equalTo(calendarButton.snp.height)
+            make.width.equalTo(self.calendarStackView.snp.width).multipliedBy(0.3)
         }
         
         calendarStackView.snp.makeConstraints { make in
