@@ -34,12 +34,6 @@ class TextFieldButtonsView: BaseView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func configureUI() {
-        super.configureUI()
-        
-        
-    }
-    
     override func configureHierarchy() {
         self.addSubview(cancelButton)
         self.addSubview(checkButton)

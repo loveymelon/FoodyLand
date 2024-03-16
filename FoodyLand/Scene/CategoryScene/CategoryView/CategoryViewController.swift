@@ -20,18 +20,17 @@ class CategoryViewController: BaseViewController<CategoryView> {
     
     private let categoryViewModel = CategoryViewModel()
 
-    private var dataSource: UICollectionViewDiffableDataSource<CellSetion, CategoryData>?
+    private var dataSource: UICollectionViewDiffableDataSource<CellSetion, String>?
     
     weak var delegate: CategoryDataDelegate?
-    
-    var res = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         makeCellRegisteration()
-        sectionSnapShot()
+        sectionSnapShot(data: [])
         addButtonAction()
+        categoryViewModel.inputViewDidLoadTrigger.value = ()
     }
     
     override func dataSourceDelegate() {
@@ -39,10 +38,10 @@ class CategoryViewController: BaseViewController<CategoryView> {
     }
     
     override func bindData() {
-        categoryViewModel.arr2.bind { [weak self] _ in
+        categoryViewModel.outputCategoryData.bind { [weak self] result in
             guard let self else { return }
             
-            sectionSnapShot()
+            sectionSnapShot(data: result)
         }
     }
 
@@ -51,32 +50,34 @@ class CategoryViewController: BaseViewController<CategoryView> {
 extension CategoryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell else {
-            print("aaa")
             return }
+        guard let text = cell.categoryLabel.text else { return }
         
-        res = cell.categoryLabel.text!
-//        if indexPath.section == 1 {
-//            let cell =
-//        }
+        categoryViewModel.selectData = text
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        categoryViewModel.selectData = ""
+    }
+    
 }
 
 extension CategoryViewController {
-    private func plusRegistration() -> UICollectionView.CellRegistration<CategoryPlusCollectionViewCell, CategoryData> {
+    private func plusRegistration() -> UICollectionView.CellRegistration<CategoryPlusCollectionViewCell, String> {
         
-        return UICollectionView.CellRegistration <CategoryPlusCollectionViewCell, CategoryData>{ [weak self] cell, indexPath, itemIdentifier in
+        return UICollectionView.CellRegistration <CategoryPlusCollectionViewCell, String>{ [weak self] cell, indexPath, itemIdentifier in
             guard let self else { return }
             
             cell.categoryViewModel = categoryViewModel
         }
     }
     
-    private func categoryCellRegistration() -> UICollectionView.CellRegistration<CategoryCollectionViewCell, CategoryData> {
+    private func categoryCellRegistration() -> UICollectionView.CellRegistration<CategoryCollectionViewCell, String> {
         
-        UICollectionView.CellRegistration <CategoryCollectionViewCell, CategoryData>{ [weak self] cell, indexPath, itemIdentifier in
+        UICollectionView.CellRegistration <CategoryCollectionViewCell, String>{ [weak self] cell, indexPath, itemIdentifier in
             guard let self else { return }
             
-            cell.categoryLabel.text = itemIdentifier.text
+            cell.categoryLabel.text = itemIdentifier
         }
     }
     
@@ -101,16 +102,16 @@ extension CategoryViewController {
         
     }
     
-    private func sectionSnapShot() {
+    private func sectionSnapShot(data: [String]) {
         
-        var snapshot = NSDiffableDataSourceSectionSnapshot<CategoryData>()
+        var snapshot = NSDiffableDataSourceSectionSnapshot<String>()
         
-        snapshot.append([CategoryData(text: "")])
+        snapshot.append([""])
         dataSource?.apply(snapshot, to: .plus)
         
-        var subSnapshot = NSDiffableDataSourceSectionSnapshot<CategoryData>()
+        var subSnapshot = NSDiffableDataSourceSectionSnapshot<String>()
         
-        subSnapshot.append(categoryViewModel.arr2.value)
+        subSnapshot.append(data)
         dataSource?.apply(subSnapshot, to: .other)
         
     }
@@ -125,11 +126,19 @@ extension CategoryViewController {
         
         mainView.checkButton.addAction(UIAction(handler: { [weak self] _ in
             guard let self else { return }
-            guard !res.isEmpty else { return }
+            guard !categoryViewModel.selectData.isEmpty else { return }
             
-            delegate?.passCategoryData(res: res)
+            delegate?.passCategoryData(res: categoryViewModel.selectData)
             
             dismiss(animated: true)
+            
+        }), for: .touchUpInside)
+        
+        mainView.deleteButton.addAction(UIAction(handler: { [weak self] _ in
+            guard let self else { return }
+            guard !categoryViewModel.selectData.isEmpty else { return }
+            
+            categoryViewModel.inputDeleteTrigger.value = ()
             
         }), for: .touchUpInside)
     }

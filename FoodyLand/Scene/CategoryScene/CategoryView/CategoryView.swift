@@ -34,6 +34,15 @@ class CategoryView: BaseView {
         return button
     }()
     
+    let deleteButton: UIButton = {
+        var buttonConfig = UIButton.Configuration.plain()
+        buttonConfig.title = "삭제"
+        let button = UIButton(configuration: buttonConfig)
+        button.setTitleColor(.red, for: .normal)
+        
+        return button
+    }()
+    
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout()).then {
         $0.allowsMultipleSelection = false
     }
@@ -53,6 +62,7 @@ class CategoryView: BaseView {
         self.addSubview(categoryLabel)
         self.addSubview(checkButton)
         self.addSubview(cancelButton)
+        self.addSubview(deleteButton)
         self.backView.addSubview(collectionView)
     }
     
@@ -76,6 +86,12 @@ class CategoryView: BaseView {
         cancelButton.snp.makeConstraints { make in
             make.trailing.equalTo(self.checkButton.snp.leading).offset(5)
             make.bottom.equalTo(checkButton.snp.bottom)
+            make.height.equalTo(24)
+        }
+        
+        deleteButton.snp.makeConstraints { make in
+            make.leading.equalTo(self.safeAreaLayoutGuide).inset(10)
+            make.bottom.equalTo(cancelButton.snp.bottom)
             make.height.equalTo(24)
         }
         

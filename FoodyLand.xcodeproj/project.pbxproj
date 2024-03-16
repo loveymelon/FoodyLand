@@ -62,6 +62,8 @@
 		DF836CF02B9E17A90036649C /* CustomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF836CEF2B9E17A90036649C /* CustomDetailView.swift */; };
 		DF836CF32B9E188E0036649C /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = DF836CF22B9E188E0036649C /* Cosmos */; };
 		DF836CF82B9F17BD0036649C /* MarketDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF836CF72B9F17BD0036649C /* MarketDetailView.swift */; };
+		DF83960D2BA5357800889A19 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF83960C2BA5357800889A19 /* RealmModel.swift */; };
+		DF83960F2BA548B200889A19 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF83960E2BA548B200889A19 /* RealmRepository.swift */; };
 		DF84A05B2B9CD36C00B6601F /* UISearchBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF84A05A2B9CD36C00B6601F /* UISearchBar+Extension.swift */; };
 		DF89A61B2BA41CC50032CA57 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF89A61A2BA41CC50032CA57 /* UITextField+Extension.swift */; };
 /* End PBXBuildFile section */
@@ -112,6 +114,8 @@
 		DF836CED2B9E175E0036649C /* CustomDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDetailViewController.swift; sourceTree = "<group>"; };
 		DF836CEF2B9E17A90036649C /* CustomDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDetailView.swift; sourceTree = "<group>"; };
 		DF836CF72B9F17BD0036649C /* MarketDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDetailView.swift; sourceTree = "<group>"; };
+		DF83960C2BA5357800889A19 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
+		DF83960E2BA548B200889A19 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		DF84A05A2B9CD36C00B6601F /* UISearchBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Extension.swift"; sourceTree = "<group>"; };
 		DF89A61A2BA41CC50032CA57 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -221,6 +225,7 @@
 		DF71C9E42B999A0900D5983C /* FoodyLand */ = {
 			isa = PBXGroup;
 			children = (
+				DF83960B2BA5355300889A19 /* RealmHelper */,
 				DF836CF62B9F177B0036649C /* CustomView */,
 				DF0542712B9B4E50009BC6AB /* Network */,
 				DF05423F2B9B04EE009BC6AB /* GoogleService-Info.plist */,
@@ -300,11 +305,8 @@
 		DF7421FB2BA31BB00097A5DB /* CategoryScene */ = {
 			isa = PBXGroup;
 			children = (
-				DF7421FC2BA31C490097A5DB /* CategoryViewController.swift */,
-				DF7421FE2BA31C790097A5DB /* CategoryView.swift */,
-				DF7422002BA332490097A5DB /* CategoryViewModel.swift */,
-				DF7422042BA33E8C0097A5DB /* CategoryCollectionViewCell.swift */,
-				DF7422062BA33E9D0097A5DB /* CategoryPlusCollectionViewCell.swift */,
+				DF8396112BA5986400889A19 /* CategoryViewModel */,
+				DF8396102BA5985800889A19 /* CategoryView */,
 			);
 			path = CategoryScene;
 			sourceTree = "<group>";
@@ -342,6 +344,34 @@
 				DF74220A2BA36C210097A5DB /* TextFieldButtonsView.swift */,
 			);
 			path = CustomView;
+			sourceTree = "<group>";
+		};
+		DF83960B2BA5355300889A19 /* RealmHelper */ = {
+			isa = PBXGroup;
+			children = (
+				DF83960C2BA5357800889A19 /* RealmModel.swift */,
+				DF83960E2BA548B200889A19 /* RealmRepository.swift */,
+			);
+			path = RealmHelper;
+			sourceTree = "<group>";
+		};
+		DF8396102BA5985800889A19 /* CategoryView */ = {
+			isa = PBXGroup;
+			children = (
+				DF7421FC2BA31C490097A5DB /* CategoryViewController.swift */,
+				DF7421FE2BA31C790097A5DB /* CategoryView.swift */,
+				DF7422042BA33E8C0097A5DB /* CategoryCollectionViewCell.swift */,
+				DF7422062BA33E9D0097A5DB /* CategoryPlusCollectionViewCell.swift */,
+			);
+			path = CategoryView;
+			sourceTree = "<group>";
+		};
+		DF8396112BA5986400889A19 /* CategoryViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DF7422002BA332490097A5DB /* CategoryViewModel.swift */,
+			);
+			path = CategoryViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -479,6 +509,7 @@
 				DF1709402B99BF55002594AF /* UIViewController+Extension.swift in Sources */,
 				DF7C2C132BA206560014BB21 /* FoodyMapViewModel.swift in Sources */,
 				DF7422052BA33E8C0097A5DB /* CategoryCollectionViewCell.swift in Sources */,
+				DF83960F2BA548B200889A19 /* RealmRepository.swift in Sources */,
 				DF7D469F2B9CC1B100C76C1F /* String+Extension.swift in Sources */,
 				DF01C6A92BA0732C00BBA5D3 /* MyFloatingPanelLayout.swift in Sources */,
 				DF01C69A2BA0501300BBA5D3 /* CustomDetailViewModel.swift in Sources */,
@@ -496,6 +527,7 @@
 				DF84A05B2B9CD36C00B6601F /* UISearchBar+Extension.swift in Sources */,
 				DF7C2C102BA1D11C0014BB21 /* Date+Extension.swift in Sources */,
 				DF7422072BA33E9D0097A5DB /* CategoryPlusCollectionViewCell.swift in Sources */,
+				DF83960D2BA5357800889A19 /* RealmModel.swift in Sources */,
 				DF01C6A22BA059E600BBA5D3 /* CalendarView.swift in Sources */,
 				DF74220B2BA36C210097A5DB /* TextFieldButtonsView.swift in Sources */,
 				DF71C9E82B999A0900D5983C /* SceneDelegate.swift in Sources */,

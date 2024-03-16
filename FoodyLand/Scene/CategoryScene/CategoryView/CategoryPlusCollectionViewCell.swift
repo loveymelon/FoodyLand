@@ -69,7 +69,7 @@ extension CategoryPlusCollectionViewCell: ConfigureUIProtocol {
             guard let self else { return }
             guard let text = plusTextField.text else { return }
             
-            categoryViewModel?.arr2.value.insert(CategoryData(text: text), at: 0)
+            categoryViewModel?.inputCategoryData.value = text
             
             self.isSelected = false
             deSelectCell()
