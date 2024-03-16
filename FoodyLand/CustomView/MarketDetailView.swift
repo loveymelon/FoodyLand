@@ -13,6 +13,7 @@ class MarketDetailView: BaseView {
 
     let marketImageView = UIImageView().then {
         $0.image = .basic
+        $0.isUserInteractionEnabled = true
     }
     
     let marketTitleImageView = UIImageView().then {
@@ -107,8 +108,8 @@ class MarketDetailView: BaseView {
     
     override func configureLayout() {
         marketImageView.snp.makeConstraints { make in
-            make.horizontalEdges.equalTo(self.safeAreaLayoutGuide).inset(100)
-            make.height.equalTo(self.marketImageView.snp.width)
+            make.horizontalEdges.equalTo(self.safeAreaLayoutGuide).inset(70)
+            make.height.equalTo(self.marketImageView.snp.width).multipliedBy(0.9)
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).inset(10)
         }
         

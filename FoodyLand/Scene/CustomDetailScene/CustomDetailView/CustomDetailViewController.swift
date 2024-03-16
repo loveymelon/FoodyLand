@@ -8,6 +8,7 @@
 import UIKit
 import FloatingPanel
 import Then
+import PhotosUI
 
 // 서치 화면에 아무것도 없을때 화면 구성하고 cellConfigure따로 빼기 오늘은 공수산정 꼭 정하자
 
@@ -20,13 +21,19 @@ final class CustomDetailViewController: BaseViewController<CustomDetailView> {
         $0.isRemovalInteractionEnabled = true
         $0.layout = MyFloatingPanelLayout()
     }
-
+    
     let customDetailViewModel = CustomDetailViewModel()
+    
+    @objc func tappedImageView() {
+        openPhotoLibrary()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         buttonAddAction()
+        photoAuth()
+        imageAddGesture()
     }
     
     override func bindData() {
@@ -81,6 +88,52 @@ extension CustomDetailViewController {
         }), for: .touchUpInside)
     }
     
+    private func imageAddGesture() {
+        let imageTapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedImageView))
+        
+        mainView.marketDetailView.marketImageView.addGestureRecognizer(imageTapGesture)
+    }
+    
+    private func photoAuth() {
+        let requiredAccessLevel: PHAccessLevel = .readWrite
+        PHPhotoLibrary.requestAuthorization(for: requiredAccessLevel) { [weak self] authorizationStatus in
+            
+            guard let self else { return }
+            
+            DispatchQueue.main.async {
+                switch authorizationStatus {
+                case .denied, .notDetermined, .limited:
+                    self.showSettingAlert(title: "사진 라이브러리 권한 필요", message: "사진을 선택하려면 사진 라이브러리 권한이 필요합니다. 설정에서 권한을 변경할 수 있습니다.")
+                case .authorized, .restricted:
+                    break
+                default:
+                    self.showSettingAlert(title: "사진 라이브러리 권한 필요", message: "사진을 선택하려면 사진 라이브러리 권한이 필요합니다. 설정에서 권한을 변경할 수 있습니다.")
+                }
+            }
+        }
+    }
+    
+    private func openPhotoLibrary() {
+        if PHPhotoLibrary.authorizationStatus() == .authorized || PHPhotoLibrary.authorizationStatus() == .restricted {
+            var configuration = PHPickerConfiguration()
+            
+            configuration.selectionLimit = 3
+            configuration.filter = .any(of: [.images])
+            
+            let picker = PHPickerViewController(configuration: configuration)
+            picker.delegate = self
+            
+            self.present(picker, animated: true)
+        } else {
+            DispatchQueue.main.async {
+                self.showSettingAlert(title: "사진 라이브러리 권한 필요", message: "사진을 선택하려면 사진 라이브러리 권한이 필요합니다. 설정에서 권한을 변경할 수 있습니다.")
+            }
+            
+        }
+    }
+    
+    
+    
 }
 
 extension CustomDetailViewController: FloatingPanelControllerDelegate {
@@ -100,5 +153,40 @@ extension CustomDetailViewController: CalendarDataDelegate {
 extension CustomDetailViewController: CategoryDataDelegate {
     func passCategoryData(res: String) {
         mainView.categoryLabel.text = res
+    }
+}
+
+// 🎆 유저가 선택을 완료했거나 취소 버튼으로 닫았을 때 알려주는 delegate
+extension CustomDetailViewController: PHPickerViewControllerDelegate, UINavigationControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        
+        var selectedImages: [UIImage] = []
+        
+        let group = DispatchGroup()
+        
+        for result in results where result.itemProvider.canLoadObject(ofClass: UIImage.self) {
+            group.enter()
+            result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] (image, _ ) in
+                guard let self = self else { return }
+                
+                guard let image = image as? UIImage else { return }
+                selectedImages.append(image)
+                
+                group.leave()
+                
+                guard selectedImages.count == results.count else { return }
+                group.notify(queue: .main) {
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else { return }
+                        
+                        mainView.marketDetailView.marketImageView.image = selectedImages[0]
+                        picker.dismiss(animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+        
+        
+        
     }
 }

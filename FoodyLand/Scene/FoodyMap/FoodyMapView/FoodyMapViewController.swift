@@ -58,7 +58,7 @@ extension FoodyMapViewController {
             
             guard CLLocationManager.locationServicesEnabled() else {
                 // 디바이스 자체의 위치 권한이 꺼져있는지 확인 로직
-                showLocationSettingAlert()
+                showSettingAlert(title: "위치 정보 이용", message: "위치 서비스를 사용할 수 없습니다. 기기의 '설정>개인정보 보호'에서 위치 서비스를 켜주세요")
                 return
             }
             
@@ -88,13 +88,13 @@ extension FoodyMapViewController {
             locationManager.requestWhenInUseAuthorization()
         case .denied:
             // 거절될때는 미리 준비된 좌표로 보여준다.
-            showLocationSettingAlert()
+            showSettingAlert(title: "위치 정보 이용", message: "위치 서비스를 사용할 수 없습니다. 기기의 '설정>개인정보 보호'에서 위치 서비스를 켜주세요")
             let coordinate = CLLocationCoordinate2D(latitude: 37.566685, longitude: 126.978400)
             setRegionAndAnnotation(center: coordinate)
             locationManager.stopUpdatingLocation()
         case .restricted:
             // 안심자녀
-            showLocationSettingAlert()
+            showSettingAlert(title: "위치 정보 이용", message: "위치 서비스를 사용할 수 없습니다. 기기의 '설정>개인정보 보호'에서 위치 서비스를 켜주세요")
         case .authorizedWhenInUse:
             // 사용할 때만
             locationManager.startUpdatingLocation()
@@ -112,7 +112,7 @@ extension FoodyMapViewController {
         let region = MKCoordinateRegion(center: center, latitudinalMeters: 1300, longitudinalMeters: 1300)
         
         mainView.mapView.setRegion(region, animated: true)
-        // 공수산정
+        
     }
     
 }
