@@ -66,6 +66,7 @@
 		DF83960F2BA548B200889A19 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF83960E2BA548B200889A19 /* RealmRepository.swift */; };
 		DF84A05B2B9CD36C00B6601F /* UISearchBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF84A05A2B9CD36C00B6601F /* UISearchBar+Extension.swift */; };
 		DF89A61B2BA41CC50032CA57 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF89A61A2BA41CC50032CA57 /* UITextField+Extension.swift */; };
+		DF96128C2BA6979F00419511 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF96128B2BA6979F00419511 /* FileManager+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -118,6 +119,7 @@
 		DF83960E2BA548B200889A19 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		DF84A05A2B9CD36C00B6601F /* UISearchBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Extension.swift"; sourceTree = "<group>"; };
 		DF89A61A2BA41CC50032CA57 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		DF96128B2BA6979F00419511 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +192,7 @@
 				DF84A05A2B9CD36C00B6601F /* UISearchBar+Extension.swift */,
 				DF7C2C0F2BA1D11C0014BB21 /* Date+Extension.swift */,
 				DF89A61A2BA41CC50032CA57 /* UITextField+Extension.swift */,
+				DF96128B2BA6979F00419511 /* FileManager+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 				DF733C822B9D46C600CC0B93 /* SearchViewController.swift in Sources */,
 				DF82E8A12B9A220900838549 /* UIView+Extension.swift in Sources */,
 				DF1709402B99BF55002594AF /* UIViewController+Extension.swift in Sources */,
+				DF96128C2BA6979F00419511 /* FileManager+Extension.swift in Sources */,
 				DF7C2C132BA206560014BB21 /* FoodyMapViewModel.swift in Sources */,
 				DF7422052BA33E8C0097A5DB /* CategoryCollectionViewCell.swift in Sources */,
 				DF83960F2BA548B200889A19 /* RealmRepository.swift in Sources */,
