@@ -20,10 +20,10 @@ class UserDiary: Object {
     
     @Persisted var location: Location?
     
-    @Persisted var category: List<Category>
-    @Persisted var userImages: List<UserImages>
+    @Persisted var category: Category? // 한 명의 사용자가 하나의 카테고리만 가질 수 있다. 1 : 1
+    @Persisted var userImages: List<UserImages> // 한 명의 사용자가 여러개의 사진을 가질 수 있다.
     
-    convenience init(marketId: String, marketName: String, address: String, url: String, star: Double, memo: String, date: Date, location: Location? = nil) {
+    convenience init(marketId: String, marketName: String, address: String, url: String, star: Double, memo: String, date: Date, category: Category?) {
         self.init()
         
         self.marketId = marketId
@@ -33,7 +33,7 @@ class UserDiary: Object {
         self.star = star
         self.memo = memo
         self.date = date
-        self.location = location
+        self.category = category
     }
 }
 
@@ -48,7 +48,7 @@ class Category: Object {
     @Persisted var categoryName: String
     @Persisted var regDate: Date
     
-    @Persisted(originProperty: "category") var parents: LinkingObjects<UserDiary>
+    @Persisted var diarys: List<UserDiary> // 하나의 카테고리가 여러명의 유저를 가질 수 있으므로 1 : N
     
     convenience init(categoryName: String, regDate: Date) {
         self.init()

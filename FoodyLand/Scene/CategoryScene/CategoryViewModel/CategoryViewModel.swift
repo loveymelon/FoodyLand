@@ -9,9 +9,7 @@ import Foundation
 import RealmSwift
 
 class CategoryViewModel {
-    var str = ["새 컬렉션", "전체"] // repository로 fetch시 여기에 append됨
-    
-    let outputCategoryData: Observable<[String]> = Observable([])
+    let outputCategoryData: Observable<[CategoryData]?> = Observable(nil)
     let outputError: Observable<RealmError> = Observable(.unknownError)
     
     let inputCategoryData: Observable<String> = Observable("")
@@ -19,6 +17,7 @@ class CategoryViewModel {
     let inputDeleteTrigger: Observable<Void?> = Observable(nil)
     
     var selectData = ""
+    var selectIndex: Int? = nil
     let repository = RealmRepository()
     
     init() {
@@ -39,22 +38,35 @@ class CategoryViewModel {
         inputDeleteTrigger.bind { [weak self] result in
             guard let self else { return }
             guard result != nil else { return }
-            guard !selectData.isEmpty else { return }
+            guard let num = selectIndex else { return }
             
-            deleteCategoryData(text: selectData)
+            deleteCategoryData(index: num)
         }
     }
     
     private func fetchCategoryDatas() {
         let data = repository.fetchItem(type: Category.self)
-        let sortedData = data.sorted(byKeyPath: "regDate", ascending: false) // 추가한 최신별로 바꿔준다.
-        var tempData: [String] = []
         
-        for item in sortedData {
-            tempData.append(item.categoryName)
+        print(data)
+        
+        switch data {
+        case .success(let success):
+            
+            let sortedData = success.sorted(byKeyPath: "regDate", ascending: false) // 추가한 최신별로 바꿔준다.
+            
+            var tempData: [CategoryData] = []
+            
+            for item in sortedData {
+                tempData.append(CategoryData(category: item.categoryName))
+            }
+            
+            outputCategoryData.value = tempData
+            
+        case .failure(let failure):
+            outputError.value = failure
         }
         
-        outputCategoryData.value = tempData
+        
     }
     
     private func insertCategoryData(text: String) {
@@ -65,9 +77,18 @@ class CategoryViewModel {
         case .success(_):
             
             let categoryDatas = repository.fetchItem(type: Category.self)
-            let sortedData = categoryDatas.sorted(byKeyPath: "regDate", ascending: false)
             
-            outputCategoryData.value.insert(sortedData[0].categoryName, at: 0) // 테이블이 업데이트 되었으니 뷰에도 업데이트 하게 해준다.
+            switch categoryDatas {
+                
+            case .success(let success):
+                
+                let sortedData = success.sorted(byKeyPath: "regDate", ascending: false)
+                outputCategoryData.value?.insert(CategoryData(category: sortedData[0].categoryName), at: 0) // 테이블이 업데이트 되었으니 뷰에도 업데이트 하게 해준다.
+                
+            case .failure(let failure):
+                outputError.value = failure
+            }
+            
             
         case .failure(let failure):
             outputError.value = failure
@@ -75,12 +96,13 @@ class CategoryViewModel {
         
     }
     
-    private func deleteCategoryData(text: String) {
+    private func deleteCategoryData(index: Int) {
         
-        switch repository.deleteCategory(text: text) {
+        switch repository.deleteCategory(index: index) {
         case .success(_):
             print("success")
             fetchCategoryDatas() // 삭제했으니 뷰에도 업데이트하기 위해서
+            selectIndex = nil
         case .failure(let failure):
             outputError.value = failure
         }

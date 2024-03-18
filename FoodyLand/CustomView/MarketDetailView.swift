@@ -10,10 +10,22 @@ import SnapKit
 import Then
 
 class MarketDetailView: BaseView {
+    
+    let scrollView = UIScrollView().then {
+        $0.isPagingEnabled = true
+        $0.isScrollEnabled = true
+    }
 
     let marketImageView = UIImageView().then {
         $0.image = .basic
         $0.isUserInteractionEnabled = true
+    }
+    
+    let pageControl = UIPageControl().then {
+        $0.pageIndicatorTintColor = .white
+        $0.currentPageIndicatorTintColor = .red
+        $0.backgroundColor = .black
+        $0.currentPage = 0
     }
     
     let marketTitleImageView = UIImageView().then {
@@ -85,7 +97,9 @@ class MarketDetailView: BaseView {
     }
     
     override func configureHierarchy() {
-        self.addSubview(marketImageView)
+        self.addSubview(scrollView)
+        self.scrollView.addSubview(marketImageView)
+        self.marketImageView.addSubview(pageControl)
         
         [marketTitleImageView, marketTitleLabel].forEach { items in
             marketTitleStackView.addArrangedSubview(items)
@@ -107,10 +121,23 @@ class MarketDetailView: BaseView {
     }
     
     override func configureLayout() {
-        marketImageView.snp.makeConstraints { make in
+        scrollView.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(self.safeAreaLayoutGuide).inset(70)
-            make.height.equalTo(self.marketImageView.snp.width).multipliedBy(0.9)
-            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).inset(10)
+            make.height.equalTo(self.scrollView.snp.width).multipliedBy(0.9)
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+        }
+        
+        marketImageView.snp.makeConstraints { make in
+//            make.horizontalEdges.equalTo(self.safeAreaLayoutGuide).inset(70)
+//            make.height.equalTo(self.marketImageView.snp.width).multipliedBy(0.9)
+//            make.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+            make.height.equalTo(scrollView)
+            make.width.equalTo(scrollView)
+        }
+        
+        pageControl.snp.makeConstraints { make in
+            make.bottom.equalTo(self.marketImageView.snp.bottom)
+            make.width.equalTo(self.marketImageView.snp.width)
         }
         
         marketTitleImageView.snp.makeConstraints { make in
@@ -154,7 +181,7 @@ class MarketDetailView: BaseView {
         
         marketDetailStackView.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(self.safeAreaLayoutGuide).inset(10)
-            make.top.equalTo(self.marketImageView.snp.bottom).offset(10)
+            make.top.equalTo(self.scrollView.snp.bottom).offset(10)
             make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).inset(10)
         }
         

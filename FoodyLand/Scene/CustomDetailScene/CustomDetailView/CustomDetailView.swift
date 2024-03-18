@@ -20,7 +20,7 @@ final class CustomDetailView: BaseView {
         $0.font = .boldSystemFont(ofSize: 20)
     }
     
-    private let starView = CosmosView().then {
+    let starView = CosmosView().then {
         $0.settings.fillMode = .full
         $0.settings.starSize = 30
         $0.settings.starMargin = 5
@@ -85,12 +85,11 @@ final class CustomDetailView: BaseView {
         $0.text = "메모"
     }
     
-    private let memoTextView = UITextView().then {
+    let memoTextView = UITextView().then {
         $0.layer.cornerRadius = 10
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.lightGray.cgColor
         $0.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 0)
-        
     }
     
     let saveButton: UIButton = {

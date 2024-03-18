@@ -98,8 +98,8 @@ extension SearchViewController: UICollectionViewDelegate {
         
         guard let data = dataSource?.itemIdentifier(for: indexPath) else { return }
         
-        vc.customDetailViewModel.inoutputDetailData.value = data
-        print("tapped")
+        vc.customDetailViewModel.inputSearchData = data
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -9,6 +9,11 @@ import UIKit
 import SnapKit
 import Then
 
+struct CategoryData: Hashable {
+    let id = UUID()
+    let category: String
+}
+
 class CategoryView: BaseView {
 
     let backView = UIView().then {

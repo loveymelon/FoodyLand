@@ -16,4 +16,18 @@ extension String {
         
         return result
     }
+    
+    func toDate() -> Date? { //"yyyy-MM-dd HH:mm:ss"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        dateFormatter.locale = .current
+        dateFormatter.timeZone = .current
+        
+        if let date = dateFormatter.date(from: self) {
+            return date
+        } else {
+            return nil
+        }
+    }
+    
 }

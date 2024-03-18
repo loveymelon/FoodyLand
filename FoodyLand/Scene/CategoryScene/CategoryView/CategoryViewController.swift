@@ -13,14 +13,14 @@ enum CellSetion: CaseIterable {
 }
 
 protocol CategoryDataDelegate: AnyObject {
-    func passCategoryData(res: String)
+    func passCategoryData(res: String, index: Int?)
 }
 
 class CategoryViewController: BaseViewController<CategoryView> {
     
     private let categoryViewModel = CategoryViewModel()
 
-    private var dataSource: UICollectionViewDiffableDataSource<CellSetion, String>?
+    private var dataSource: UICollectionViewDiffableDataSource<CellSetion, CategoryData>?
     
     weak var delegate: CategoryDataDelegate?
     
@@ -40,8 +40,9 @@ class CategoryViewController: BaseViewController<CategoryView> {
     override func bindData() {
         categoryViewModel.outputCategoryData.bind { [weak self] result in
             guard let self else { return }
+            guard let data = result else { return }
             
-            sectionSnapShot(data: result)
+            sectionSnapShot(data: data)
         }
     }
 
@@ -53,31 +54,33 @@ extension CategoryViewController: UICollectionViewDelegate {
             return }
         guard let text = cell.categoryLabel.text else { return }
         
+        categoryViewModel.selectIndex = indexPath.item
         categoryViewModel.selectData = text
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         categoryViewModel.selectData = ""
+        categoryViewModel.selectIndex = nil
     }
     
 }
 
 extension CategoryViewController {
-    private func plusRegistration() -> UICollectionView.CellRegistration<CategoryPlusCollectionViewCell, String> {
+    private func plusRegistration() -> UICollectionView.CellRegistration<CategoryPlusCollectionViewCell, CategoryData> {
         
-        return UICollectionView.CellRegistration <CategoryPlusCollectionViewCell, String>{ [weak self] cell, indexPath, itemIdentifier in
+        return UICollectionView.CellRegistration <CategoryPlusCollectionViewCell, CategoryData>{ [weak self] cell, indexPath, itemIdentifier in
             guard let self else { return }
             
             cell.categoryViewModel = categoryViewModel
         }
     }
     
-    private func categoryCellRegistration() -> UICollectionView.CellRegistration<CategoryCollectionViewCell, String> {
+    private func categoryCellRegistration() -> UICollectionView.CellRegistration<CategoryCollectionViewCell, CategoryData> {
         
-        UICollectionView.CellRegistration <CategoryCollectionViewCell, String>{ [weak self] cell, indexPath, itemIdentifier in
+        UICollectionView.CellRegistration <CategoryCollectionViewCell, CategoryData>{ [weak self] cell, indexPath, itemIdentifier in
             guard let self else { return }
             
-            cell.categoryLabel.text = itemIdentifier
+            cell.categoryLabel.text = itemIdentifier.category
         }
     }
     
@@ -102,14 +105,14 @@ extension CategoryViewController {
         
     }
     
-    private func sectionSnapShot(data: [String]) {
+    private func sectionSnapShot(data: [CategoryData]) {
         
-        var snapshot = NSDiffableDataSourceSectionSnapshot<String>()
+        var snapshot = NSDiffableDataSourceSectionSnapshot<CategoryData>()
         
-        snapshot.append([""])
+        snapshot.append([CategoryData(category: "")])
         dataSource?.apply(snapshot, to: .plus)
         
-        var subSnapshot = NSDiffableDataSourceSectionSnapshot<String>()
+        var subSnapshot = NSDiffableDataSourceSectionSnapshot<CategoryData>()
         
         subSnapshot.append(data)
         dataSource?.apply(subSnapshot, to: .other)
@@ -128,7 +131,7 @@ extension CategoryViewController {
             guard let self else { return }
             guard !categoryViewModel.selectData.isEmpty else { return }
             
-            delegate?.passCategoryData(res: categoryViewModel.selectData)
+            delegate?.passCategoryData(res: categoryViewModel.selectData, index: categoryViewModel.selectIndex)
             
             dismiss(animated: true)
             
