@@ -31,13 +31,11 @@ final class CustomDetailViewController: BaseViewController<CustomDetailView> {
     var userImages: [UIImage] = [] {
         didSet {
             mainView.marketDetailView.pageControl.numberOfPages = userImages.count
+            customDetailViewModel.inputUserImageCount.value = userImages.count
             
-            mainView.marketDetailView.marketImageView.image = userImages.count != 0 ? userImages[mainView.marketDetailView.pageControl.currentPage] : .basic
-            
-            print(userImages)
-            
+            mainView.marketDetailView.marketImageView.image = customDetailViewModel.outputImageEmptyBool.value ? userImages[mainView.marketDetailView.pageControl.currentPage] : .basic
         }
-    } // viewModel에 보내서 갯수가 마지막인지 파악후 bool값을 보낸다.
+    }
     
     @objc func tappedImageView() {
 
@@ -45,15 +43,17 @@ final class CustomDetailViewController: BaseViewController<CustomDetailView> {
             guard let self else { return }
             
             if userImages.count != 0 {
+                customDetailViewModel.inputRemoveIndex.value = mainView.marketDetailView.pageControl.currentPage
+                
                 userImages.remove(at: mainView.marketDetailView.pageControl.currentPage)
             }
             
         } completionHandler: { [weak self] in
             guard let self else { return }
             
-            customDetailViewModel.inputImageCount.value = userImages.count
+            customDetailViewModel.inputUserImageCount.value = userImages.count
             
-            if customDetailViewModel.outputImageCountRes.value {
+            if customDetailViewModel.outputImageOverBool.value {
                 self.view.makeToast("사진은 최대 3개까지입니다. 삭제해주세요!" , duration: 1, position: .center)
                 return
             }
@@ -76,11 +76,31 @@ final class CustomDetailViewController: BaseViewController<CustomDetailView> {
     override func bindData() {
         customDetailViewModel.outputDetailData.bind { [weak self] result in
             guard let self = self else { return }
-            customDetailViewModel.inputImageCount.value = userImages.count
+            
+            customDetailViewModel.inputUserImageCount.value = result.userImages.count
+            
+            if customDetailViewModel.outputImageEmptyBool.value {
+                for item in result.userImages {
+                    
+                    let res = loadImageToDocument(imageName: item.id.stringValue, fileName: result.id.stringValue)
+                    
+                    switch res {
+                    case .success(let success):
+                        userImages.append(success)
+                    case .failure(let failure):
+                        print(failure)
+                    }
+                }
+            } else {
+                userImages = []
+            }
             
             mainView.marketDetailView.marketTitleLabel.text = result.marketName
             mainView.marketDetailView.marketURLLabel.text = result.url
             mainView.marketDetailView.marketAddLabel.text = result.address
+            mainView.calendarLabel.text = result.date.toString()
+            mainView.memoTextView.text = result.memo
+            mainView.categoryLabel.text = result.category?.categoryName
         }
         
         customDetailViewModel.outputCalendarData.bind { [weak self] result in
@@ -108,17 +128,100 @@ extension CustomDetailViewController {
         
         mainView.saveButton.addAction(UIAction(handler: { [weak self] _ in
             guard let self = self else { return }
-//            guard let rootVC = self.navigationController?.viewControllers[0] as? FoodyMapViewController else { return }
-
-            // viewModel - star, category, calendar, image, memo
+            guard let rootVC = self.navigationController?.viewControllers[0] as? FoodyMapViewController else { return }
             
-            mainView.marketDetailView.marketImageView.image
+            customDetailViewModel.detailData = DetailData(memo: mainView.memoTextView.text, star: mainView.starView.rating, calender: mainView.calendarLabel.text ?? "", category: mainView.categoryLabel.text ?? "")
             
-            customDetailViewModel.inputDetailData.value = DetailData(memo: mainView.memoTextView.text, star: mainView.starView.rating, calender: mainView.calendarLabel.text ?? "", category: mainView.categoryLabel.text ?? "")
+            customDetailViewModel.inputSaveButtonTrigger.value = ()
             
-//            rootVC.foodyMapViewModel.inputLocationValue.value = customDetailViewModel.inputSearchData
-//            
-//            self.navigationController?.popToRootViewController(animated: true)
+            if customDetailViewModel.outputDetailData.value.userImages.isEmpty {
+                
+                let detailData = customDetailViewModel.outputDetailData.value
+                
+                customDetailViewModel.inputSaveImageCount.value = userImages.count // 이미지 갯수만큼 생성후
+                
+                for (index, item) in detailData.userImages.enumerated() {
+                    
+                    let res = saveImageToDocument(image: userImages[index], fileName: detailData.id.stringValue, imageName: item.id.stringValue)
+                    
+                    switch res {
+                    case .success(_):
+                        print("success")
+                    case .failure(let failure):
+                        print(failure)
+                    }
+                    
+                }
+                
+            } else {
+                
+                if !customDetailViewModel.imageRemoveId.isEmpty /* 삭제할 데이터가 있을때 로직 들어감*/ {
+                    let bool = customDetailViewModel.outputImageExistBool.value// imageRemoveId의 개수 == 3 이라면 true
+                    let fileName = customDetailViewModel.outputDetailData.value.id.stringValue
+                    
+                    print(#function)
+                    
+                    for item in customDetailViewModel.imageRemoveId {
+                        print(item)
+                        
+                        let res = removeImageFromDocument(imageName: item, fileName: fileName, noData: bool)
+                        
+                        switch res {
+                        case .success(_):
+                            print("success")
+                        case .failure(let failure):
+                            print(failure)
+                        }
+                    }
+                    
+                    customDetailViewModel.inputDeleteImageTrigger.value = ()
+                    
+                    // 반영은 하나 지금 조건이랑 내부에서 생성시켜주는게 틀렸다
+                    // 아래는 몇 번 반복해야되는지 나온거다
+                    for index in (userImages.count - (customDetailViewModel.outputDetailData.value.userImages.count - customDetailViewModel.imageRemoveId.count))...userImages.count - 1 {
+                        
+                        // userImages[index] 인덱스 접근 여기서부터 다시 시작 지금 너무 졸려서 안된다....
+                        let res = saveImageToDocument(image: userImages[index], fileName: customDetailViewModel.outputDetailData.value.id.stringValue, imageName: customDetailViewModel.outputDetailData.value.userImages[index].id.stringValue) // realm 데이터를 통해서 파일에 새로운 데이터 저장
+                        
+                        switch res {
+                        case .success(_):
+                            print("success")
+                        case .failure(let failure):
+                            print(failure)
+                        }
+                    }
+                    
+                } else {
+                    
+                    let detailData = customDetailViewModel.outputDetailData.value
+                    let addData = userImages.count - customDetailViewModel.outputDetailData.value.userImages.count
+                    
+                    if addData == 0 {
+                        rootVC.foodyMapViewModel.inputLocationValue.value = customDetailViewModel.inputLocation.value
+                        self.navigationController?.popToRootViewController(animated: true)
+                        return
+                    }
+                    
+                    customDetailViewModel.inputSaveImageCount.value = addData
+                    // 삭제할 데이터 없이 추가만 한다면?
+                    for index in ((userImages.count - 1) - (addData - 1))...userImages.count - 1 {
+                        
+                        let res = saveImageToDocument(image: userImages[index], fileName: detailData.id.stringValue, imageName: detailData.userImages[index].id.stringValue)
+                        
+                        switch res {
+                        case .success(_):
+                            print("success")
+                        case .failure(let failure):
+                            print(failure)
+                        }
+                        
+                    }
+                }
+                
+            }
+            
+            rootVC.foodyMapViewModel.inputLocationValue.value = customDetailViewModel.inputLocation.value
+            self.navigationController?.popToRootViewController(animated: true)
         }), for: .touchUpInside)
             
         
@@ -230,9 +333,6 @@ extension CustomDetailViewController: PHPickerViewControllerDelegate, UINavigati
                 
                 guard selectedImages.count == results.count else { return }
                 
-                customDetailViewModel.inputImageData.value = selectedImages.count
-                
-                
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
                     
@@ -249,7 +349,6 @@ extension CustomDetailViewController: PHPickerViewControllerDelegate, UINavigati
     }
     
 }
-
 
 extension CustomDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

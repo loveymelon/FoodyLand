@@ -98,7 +98,11 @@ extension SearchViewController: UICollectionViewDelegate {
         
         guard let data = dataSource?.itemIdentifier(for: indexPath) else { return }
         
-        vc.customDetailViewModel.inputSearchData = data
+        searchViewModel.inputSelectedData.value = data
+        
+        vc.customDetailViewModel.outputDetailData.value = searchViewModel.outputUserDiary.value
+        vc.customDetailViewModel.inputLocation.value.latitude = searchViewModel.outputLocation.value.latitude
+        vc.customDetailViewModel.inputLocation.value.longitude = searchViewModel.outputLocation.value.longitude
         
         self.navigationController?.pushViewController(vc, animated: true)
     }

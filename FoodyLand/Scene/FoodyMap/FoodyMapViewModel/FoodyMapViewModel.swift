@@ -10,20 +10,18 @@ import Foundation
 class FoodyMapViewModel {
     let outputLocationValue: Observable<[Double]> = Observable([])
     
-    let inputLocationValue: Observable<Address?> = Observable(nil)
+    let inputLocationValue: Observable<Location?> = Observable(nil)
     
     init() {
-        inputLocationValue.bind { result in
+        inputLocationValue.bind { [weak self] result in
+            guard let self else { return }
             guard let value = result else { return }
             
             self.converValue(data: value)
         }
     }
     
-    private func converValue(data: Address) {
-        guard let x = Double(data.x) else { return }
-        guard let y = Double(data.y) else { return }
-        
-        self.outputLocationValue.value = [x, y]
+    private func converValue(data: Location) {
+        outputLocationValue.value = [data.latitude, data.longitude]
     }
 }

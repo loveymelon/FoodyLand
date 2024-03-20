@@ -38,6 +38,8 @@ final class FoodyMapViewController: BaseViewController<FoodyMapView> {
                 return
             }
             
+            print(result)
+            
             let location = CLLocationCoordinate2D(latitude: result[1], longitude: result[0])
             
             print(result)

@@ -10,9 +10,12 @@ import Foundation
 final class SearchViewModel {
     let outputText: Observable<[Address]> = Observable([])
     let outputData: Observable<PageData> = Observable(PageData(isEnd: false, pageableCount: 0, total: 0, sameName: NameData(keyword: "")))
+    let outputUserDiary: Observable<UserDiary> = Observable(UserDiary(marketId: "", marketName: "", address: "", url: "", star: 3.0, memo: "", date: Date(), category: nil))
+    let outputLocation: Observable<Location> = Observable(Location())
     
     let inputSearchText: Observable<String?> = Observable(nil)
     let inputPage: Observable<Int> = Observable(1)
+    let inputSelectedData: Observable<Address> = Observable(Address(addressName: "", addId: "", phone: "", placeName: "", placeURL: "", roadAddress: "", x: "", y: ""))
     
     init() {
         inputSearchText.bind { [weak self] value in
@@ -26,6 +29,13 @@ final class SearchViewModel {
             guard let self = self else { return }
             
             self.checkValue(text: self.inputSearchText.value, page: self.inputPage.value)
+        }
+        
+        inputSelectedData.bind { [weak self] result in
+            guard let self else { return }
+            guard result.addId != "" else { return }
+            
+            convertData(data: result)
         }
     }
     
@@ -53,6 +63,14 @@ final class SearchViewModel {
         }
     }
 
-
+    private func convertData(data: Address) {
+        outputUserDiary.value = UserDiary(marketId: data.addId, marketName: data.placeName, address: data.addressName, url: data.placeURL, star: 3.0, memo: "", date: Date(), category: nil)
+        
+        guard let latitude = Double(data.y) else { return }
+        guard let longitude = Double(data.x) else { return }
+        
+        outputLocation.value.latitude = latitude
+        outputLocation.value.longitude = longitude
+    }
     
 }

@@ -24,6 +24,14 @@ extension UIViewController {
         
         let directoryURL = documentDirectory.appendingPathComponent(fileName)
         
+        if !FileManager.default.fileExists(atPath: directoryURL.path) {
+            do {
+                try FileManager.default.createDirectory(at: directoryURL, withIntermediateDirectories: false, attributes: nil)
+            } catch {
+                return .failure(.fileNoExist)
+            }
+        }
+        
         let fileURL = directoryURL.appendingPathComponent("\(imageName).jpg")
         
         guard let data = image.jpegData(compressionQuality: 1) else { return .failure(.dataError) } // 용량을 낮추는 대신 데이터의 손실이 발생함 pngData가 비손실 그래픽임
@@ -40,7 +48,9 @@ extension UIViewController {
         
         guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return .failure(.noDocument) }
         
-        let directoryURL = documentDirectory.appendingPathComponent(fileName)
+        print(documentDirectory)
+        
+        let directoryURL = documentDirectory.appendingPathComponent(String(fileName))
         
         let fileURL = directoryURL.appendingPathComponent("\(imageName).jpg")
         
@@ -63,6 +73,8 @@ extension UIViewController {
         let directoryURL = documentDirectory.appendingPathComponent(fileName)
         
         let fileURL = directoryURL.appendingPathComponent("\(imageName).jpg")
+        
+        print("1231231231212", fileURL)
         
         if FileManager.default.fileExists(atPath: fileURL.path()) {
             

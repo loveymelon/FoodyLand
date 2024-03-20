@@ -18,21 +18,28 @@ class CustomDetailViewModel {
     
     let outputCalendarData: Observable<String> = Observable("")
     let outputDetailData: Observable<UserDiary> = Observable(UserDiary(marketId: "", marketName: "", address: "", url: "", star: 0, memo: "", date: Date(), category: Category(categoryName: "", regDate: Date())))
-    let outputImageCountRes: Observable<Bool> = Observable(false)
-    let outputImageCount: Observable<Int> = Observable(0)
+    
+    let outputImageEmptyBool: Observable<Bool> = Observable(false) // 이미지가 비워있는지 확인
+    let outputImageCount: Observable<Int> = Observable(0) // 이미지 선택 가능수
+    let outputImageOverBool: Observable<Bool> = Observable(false) // 이미지 한도 수 여부
+    let outputImageExistBool: Observable<Bool> = Observable(false) // 이미지가 수가 동일하면 파일까지 삭제
+    
+    let inputRemoveIndex: Observable<Int?> = Observable(nil)
+    let inputSaveImageCount: Observable<Int?> = Observable(nil)
+    let inputUserImageCount: Observable<Int?> = Observable(nil) // 현재 이미지 수
+    let inputImageRemoveId: Observable<[String]> = Observable([]) // 삭제될 이미지의 아이디
+    let inputDeleteImageTrigger: Observable<Void?> = Observable(nil) // realm image data 삭제 타이밍 제공
     
     let inputViewDidLoadTrigger: Observable<Void?> = Observable(nil)
     let inputSaveButtonTrigger: Observable<Void?> = Observable(nil)
     let inputCalendarData: Observable<Date?> = Observable(nil)
+    let inputLocation: Observable<Location> = Observable(Location())
     
-    let inputImageData: Observable<Int?> = Observable(nil) // 하나만 사용해도 되는지 확인
-    let inputImageCount: Observable<Int?> = Observable(nil)
-    let inputDetailData: Observable<DetailData> = Observable(DetailData(memo: "", star: 0, calender: "", category: ""))
-    
-    var inputSearchData = Address(addressName: "", addId: "", phone: "", placeName: "", placeURL: "", roadAddress: "", x: "", y: "")
+    var detailData: DetailData = DetailData(memo: "", star: 0, calender: "", category: "")
     
     private let repository = RealmRepository()
     var selectedIndex: Int? = nil
+    var imageRemoveId: [String] = []
     
     init() {
         inputCalendarData.bind { [weak self] result in
@@ -46,35 +53,49 @@ class CustomDetailViewModel {
             guard let self else { return }
             guard result != nil else { return }
             
-            checkData(searchData: inputSearchData)
+            checkData(diaryData: outputDetailData.value)
         }
         
         inputSaveButtonTrigger.bind { [weak self] result in
             guard let self else { return }
             guard result != nil else { return }
             
-            saveData()
+            saveDetailData(data: detailData)
         }
         
-//        inputImageData.bind { [weak self] result in
-//            guard let self else { return }
-//            guard let num = result else { return }
-//            
-//            createImageData(count: num)
-//        }
-        
-        inputImageCount.bind { [weak self] result in
+        inputUserImageCount.bind { [weak self] result in
             guard let self else { return }
             guard let num = result else { return }
             
             checkImageCount(count: num)
         }
         
-        inputDetailData.bind { [weak self] result in
+        inputRemoveIndex.bind { [weak self] result in
             guard let self else { return }
-            guard result.star != 0.0 else { return }
+            guard let index = result else { return }
             
-            saveDetailData(data: result)
+            saveRemoveImageId(index: index)
+        }
+        
+        inputSaveImageCount.bind { [weak self] result in
+            guard let self else { return }
+            guard let count = result else { return }
+            
+            saveImages(index: count)
+        }
+        
+        inputImageRemoveId.bind { [weak self] result in
+            guard let self else { return }
+            guard !result.isEmpty else { return }
+            
+            checkRealmImageData(count: result.count)
+        }
+        
+        inputDeleteImageTrigger.bind { [weak self] result in
+            guard let self else { return }
+            guard result != nil else { return }
+            
+            deleteImageDatas()
         }
         
     }
@@ -84,57 +105,21 @@ class CustomDetailViewModel {
         print(outputCalendarData.value, date)
     }
     
-    private func checkData(searchData: Address) {
+    private func checkData(diaryData: UserDiary) {
         
-        let diaryData = repository.fetchItem(type: UserDiary.self)
+//        print(inputLocation.value)
         
+        let data = repository.checkData(location: inputLocation.value)
         
-        switch diaryData {
-        case .success(let diary):
-            if repository.checkData(id: searchData.addId) { // 두 번 연산한다는 단점 때문에 나중에 수정해야됨
-                
-                for item in diary {
-                    
-                    if item.marketId == outputDetailData.value.marketId {
-                        outputDetailData.value = item
-                        break
-                    } // realm에 값이 있다면
-                    
-                }
-                
-            } else {
-                
-                guard let latitude = Double(searchData.y) else { return }
-                guard let longitude = Double(searchData.x) else { return }
-                
-                
-                outputDetailData.value = UserDiary(marketId: searchData.addId, marketName: searchData.placeName, address: searchData.addressName, url: searchData.placeURL, star: 3.0, memo: "", date: Date(), category: Category(categoryName: "", regDate: Date()))
-                
-            } // realm에 값이 없다면
+        if !data.isEmpty {
+            guard let res = data.first else { return }
             
-        case .failure(let failure):
-            print(failure)
+            outputDetailData.value = res
         }
-    }
-    
-    private func saveData() {
-        if repository.checkData(id: outputDetailData.value.marketId) {
-            
-        } else {
-            repository.createItem(item: outputDetailData.value)
-        }
-    }
-    
-//    private func createImageData(count: Int) {
-//        for _ in 1...count {
-//            let imageData = repository.createItem(item: UserImages())
-//        }
-//    }
-    
-    private func checkImageCount(count: Int) {
-        outputImageCountRes.value = count == 3 ? true : false
-        outputImageCount.value = 3 - count
-    }
+        
+        print(outputDetailData.value)
+        
+    } // Realm에 값이 있는지 확인
     
     private func saveDetailData(data: DetailData) {
         let realmData = outputDetailData.value
@@ -143,26 +128,72 @@ class CustomDetailViewModel {
         
         let categoryData = repository.fetchCategoryItem(index: index)
         
-        
-        let location = Location()
-//        guard let latitude = Double(inputSearchData.y) else { return }
-//        guard let longitude = Double(inputSearchData.x) else { return }
-        
-        location.latitude = 0.0
-        location.longitude = 0.0
+        let location = inputLocation.value
         
         guard let date = data.calender.toDate() else { return }
         
         print(#function)
-        if repository.checkData(id: outputDetailData.value.marketId) {
-            print("fdmflsd")
+        // realm에 좌표를 가진 레코드가 있다면 업데이트, 아니면 생성
+        if !repository.checkData(location: location).isEmpty {
+            
             let res = repository.updateItem(marketItem: realmData, categoryItem: categoryData, locationData: location, detailData: data)
+            
+            switch res {
+                
+            case .success(_):
+                print("success")
+            case .failure(let failure):
+                print(failure)
+            }
+            
         } else {
-            print("aaaa")
-            let res = repository.createItem(item: realmData)
-            print(res)
+            let realmData = outputDetailData.value
+            
+            let categoryData = repository.fetchCategoryItem(index: index)
+            
+            let res = repository.createUserDiary(location: inputLocation.value, categoryItem: categoryData, detailData: data, marketItem: realmData)
+            switch res {
+                
+            case .success(_):
+                print("success")
+            case .failure(let failure):
+                print(failure)
+            }
+            
         }
         
     }
     
+    private func checkImageCount(count: Int) {
+        outputImageEmptyBool.value = count != 0 ? true : false
+        outputImageCount.value = 3 - count
+        outputImageOverBool.value = count == 3 ? true : false
+    }
+    
+    private func saveRemoveImageId(index: Int) {
+        
+        imageRemoveId.append(outputDetailData.value.userImages[index].id.stringValue)
+    }
+    
+    private func saveImages(index: Int) {
+        outputDetailData.value = repository.updateImageDatas(marketId: outputDetailData.value.marketId, imageCount: index)
+    }
+    
+    private func checkRealmImageData(count: Int) {
+        imageRemoveId
+        outputImageExistBool.value = count == 3 ? true : false
+    }
+    
+    private func deleteImageDatas() {
+        
+        for item in imageRemoveId {
+            repository.deleteImageDatas(id: item)
+        }
+        
+        let beforeImageCount = outputDetailData.value.userImages.count - imageRemoveId.count
+        guard let num = inputUserImageCount.value else { return }
+        
+        saveImages(index: num - beforeImageCount )
+        
+    }
 }
