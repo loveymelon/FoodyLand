@@ -7,6 +7,8 @@
 
 import UIKit
 
+// 스키마에서 릴리즈
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?

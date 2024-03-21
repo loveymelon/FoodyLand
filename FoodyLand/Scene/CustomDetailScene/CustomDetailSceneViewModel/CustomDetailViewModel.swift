@@ -23,12 +23,14 @@ class CustomDetailViewModel {
     let outputImageCount: Observable<Int> = Observable(0) // 이미지 선택 가능수
     let outputImageOverBool: Observable<Bool> = Observable(false) // 이미지 한도 수 여부
     let outputImageExistBool: Observable<Bool> = Observable(false) // 이미지가 수가 동일하면 파일까지 삭제
+    let outputImageDeleteData: Observable<[Int]> = Observable([]) // 삭제될 이미지의 인덱스들
+    let outputImageNoCreate: Observable<Bool> = Observable(false) // 이미지를 삭제만 한 경우
+    let outputImageCreateCount: Observable<Int> = Observable(0)
     
-    let inputRemoveIndex: Observable<Int?> = Observable(nil)
     let inputSaveImageCount: Observable<Int?> = Observable(nil)
     let inputUserImageCount: Observable<Int?> = Observable(nil) // 현재 이미지 수
-    let inputImageRemoveId: Observable<[String]> = Observable([]) // 삭제될 이미지의 아이디
     let inputDeleteImageTrigger: Observable<Void?> = Observable(nil) // realm image data 삭제 타이밍 제공
+    let inputDeleteImageDatas: Observable<Int?> = Observable(nil) // 삭제될 이미지 인덱스
     
     let inputViewDidLoadTrigger: Observable<Void?> = Observable(nil)
     let inputSaveButtonTrigger: Observable<Void?> = Observable(nil)
@@ -39,7 +41,6 @@ class CustomDetailViewModel {
     
     private let repository = RealmRepository()
     var selectedIndex: Int? = nil
-    var imageRemoveId: [String] = []
     
     init() {
         inputCalendarData.bind { [weak self] result in
@@ -70,13 +71,6 @@ class CustomDetailViewModel {
             checkImageCount(count: num)
         }
         
-        inputRemoveIndex.bind { [weak self] result in
-            guard let self else { return }
-            guard let index = result else { return }
-            
-            saveRemoveImageId(index: index)
-        }
-        
         inputSaveImageCount.bind { [weak self] result in
             guard let self else { return }
             guard let count = result else { return }
@@ -84,18 +78,18 @@ class CustomDetailViewModel {
             saveImages(index: count)
         }
         
-        inputImageRemoveId.bind { [weak self] result in
-            guard let self else { return }
-            guard !result.isEmpty else { return }
-            
-            checkRealmImageData(count: result.count)
-        }
-        
         inputDeleteImageTrigger.bind { [weak self] result in
             guard let self else { return }
             guard result != nil else { return }
             
             deleteImageDatas()
+        }
+        
+        inputDeleteImageDatas.bind { [weak self] result in
+            guard let self else { return }
+            guard let indexs = result else { return }
+            
+            checkImageDatas(index: indexs)
         }
         
     }
@@ -170,30 +164,41 @@ class CustomDetailViewModel {
         outputImageOverBool.value = count == 3 ? true : false
     }
     
-    private func saveRemoveImageId(index: Int) {
-        
-        imageRemoveId.append(outputDetailData.value.userImages[index].id.stringValue)
-    }
-    
     private func saveImages(index: Int) {
         outputDetailData.value = repository.updateImageDatas(marketId: outputDetailData.value.marketId, imageCount: index)
     }
     
     private func checkRealmImageData(count: Int) {
-        imageRemoveId
         outputImageExistBool.value = count == 3 ? true : false
     }
     
     private func deleteImageDatas() {
         
-        for item in imageRemoveId {
-            repository.deleteImageDatas(id: item)
+        for index in outputImageDeleteData.value {
+            repository.deleteImageDatas(id: outputDetailData.value.userImages[index].id.stringValue)
         }
         
-        let beforeImageCount = outputDetailData.value.userImages.count - imageRemoveId.count
-        guard let num = inputUserImageCount.value else { return }
+        outputDetailData.value.userImages = repository.fetchImages(id: outputDetailData.value.marketId) // Realm 삭제후 데이터 반영
         
-        saveImages(index: num - beforeImageCount )
+        guard let imageCount = inputUserImageCount.value else { return }
         
+        let beforeImageCount = outputDetailData.value.userImages.count
+        
+        if imageCount == beforeImageCount {
+            outputImageNoCreate.value = true
+            return
+        } // 삭제만 하고 유저가 저장할 경우 이미지 생성하지말고 바로 return
+        
+        outputImageCreateCount.value = imageCount - beforeImageCount
+        // 추가된 이미지 수
+        
+        saveImages(index: outputImageCreateCount.value )
+        
+    }
+    
+    private func checkImageDatas(index: Int) {
+        if index <= outputDetailData.value.userImages.count - 1 && !outputImageDeleteData.value.contains(index) {
+            outputImageDeleteData.value.append(index)
+        } // 이미지 수는 곧 인덱스 수를 의미한다.
     }
 }

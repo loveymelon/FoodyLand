@@ -201,4 +201,13 @@ class RealmRepository {
     
     }
     
+    func fetchImages(id: String) -> List<UserImages> {
+        let item = realm.objects(UserDiary.self).where { item in
+            item.marketId == id
+        }
+        
+        return item[0].userImages
+        
+    }
+    
 }

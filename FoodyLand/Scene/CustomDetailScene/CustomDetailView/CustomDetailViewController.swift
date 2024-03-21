@@ -12,6 +12,9 @@ import PhotosUI
 import Toast
 import os
 
+// 삭제후 추가 저장이 안됨
+// 이전 데이터에 그냥 추가도 안된다.
+
 // 서치 화면에 아무것도 없을때 화면 구성하고 cellConfigure따로 빼기 오늘은 공수산정 꼭 정하자
 
 // 이미지의 수가 3개일 때, phpicker로 가는 버튼을 막고 항상 삭제를 할지 추가를 할지 물어본다.
@@ -33,7 +36,7 @@ final class CustomDetailViewController: BaseViewController<CustomDetailView> {
             mainView.marketDetailView.pageControl.numberOfPages = userImages.count
             customDetailViewModel.inputUserImageCount.value = userImages.count
             
-            mainView.marketDetailView.marketImageView.image = customDetailViewModel.outputImageEmptyBool.value ? userImages[mainView.marketDetailView.pageControl.currentPage] : .basic
+            mainView.marketDetailView.marketImageView.image = !userImages.isEmpty /*customDetailViewModel.outputImageEmptyBool.value*/ ? userImages[mainView.marketDetailView.pageControl.currentPage] : .basic
         }
     }
     
@@ -43,7 +46,8 @@ final class CustomDetailViewController: BaseViewController<CustomDetailView> {
             guard let self else { return }
             
             if userImages.count != 0 {
-                customDetailViewModel.inputRemoveIndex.value = mainView.marketDetailView.pageControl.currentPage
+                
+                customDetailViewModel.inputDeleteImageDatas.value = mainView.marketDetailView.pageControl.currentPage
                 
                 userImages.remove(at: mainView.marketDetailView.pageControl.currentPage)
             }
@@ -76,6 +80,7 @@ final class CustomDetailViewController: BaseViewController<CustomDetailView> {
     override func bindData() {
         customDetailViewModel.outputDetailData.bind { [weak self] result in
             guard let self = self else { return }
+            print(#function)
             
             customDetailViewModel.inputUserImageCount.value = result.userImages.count
             
@@ -130,6 +135,9 @@ extension CustomDetailViewController {
             guard let self = self else { return }
             guard let rootVC = self.navigationController?.viewControllers[0] as? FoodyMapViewController else { return }
             
+            let images = userImages // 지속적으로 realm을 업데이트하고 fetch를 할때 bind가 이뤄져서 값이 달라지므로 저장해서 이 값을 쓰는 것이다.
+            // 굳이 Realm을 업데이트하고 바로 fetch를 할 필요가 없다 인스턴스만 생성해서 그 id값으로 파일 매니저를 다루고 마지막에 업데이트 시키면 된다. 이건 나중에 리팩토링할때 반영하자
+            
             customDetailViewModel.detailData = DetailData(memo: mainView.memoTextView.text, star: mainView.starView.rating, calender: mainView.calendarLabel.text ?? "", category: mainView.categoryLabel.text ?? "")
             
             customDetailViewModel.inputSaveButtonTrigger.value = ()
@@ -138,7 +146,11 @@ extension CustomDetailViewController {
                 
                 let detailData = customDetailViewModel.outputDetailData.value
                 
+                print(userImages.count, userImages) // 2
+                
                 customDetailViewModel.inputSaveImageCount.value = userImages.count // 이미지 갯수만큼 생성후
+                
+                print(userImages.count, userImages) // 4 왜냐하면 outputDetail의 값이 바뀌니까 bind가 걸리는거다.
                 
                 for (index, item) in detailData.userImages.enumerated() {
                     
@@ -155,33 +167,16 @@ extension CustomDetailViewController {
                 
             } else {
                 
-                if !customDetailViewModel.imageRemoveId.isEmpty /* 삭제할 데이터가 있을때 로직 들어감*/ {
+                if !customDetailViewModel.outputImageDeleteData.value.isEmpty /* 삭제할 데이터가 있을때 로직 들어감*/ {
                     let bool = customDetailViewModel.outputImageExistBool.value// imageRemoveId의 개수 == 3 이라면 true
                     let fileName = customDetailViewModel.outputDetailData.value.id.stringValue
+                    let removeIndex = customDetailViewModel.outputImageDeleteData.value
                     
                     print(#function)
                     
-                    for item in customDetailViewModel.imageRemoveId {
-                        print(item)
+                    for index in removeIndex {
                         
-                        let res = removeImageFromDocument(imageName: item, fileName: fileName, noData: bool)
-                        
-                        switch res {
-                        case .success(_):
-                            print("success")
-                        case .failure(let failure):
-                            print(failure)
-                        }
-                    }
-                    
-                    customDetailViewModel.inputDeleteImageTrigger.value = ()
-                    
-                    // 반영은 하나 지금 조건이랑 내부에서 생성시켜주는게 틀렸다
-                    // 아래는 몇 번 반복해야되는지 나온거다
-                    for index in (userImages.count - (customDetailViewModel.outputDetailData.value.userImages.count - customDetailViewModel.imageRemoveId.count))...userImages.count - 1 {
-                        
-                        // userImages[index] 인덱스 접근 여기서부터 다시 시작 지금 너무 졸려서 안된다....
-                        let res = saveImageToDocument(image: userImages[index], fileName: customDetailViewModel.outputDetailData.value.id.stringValue, imageName: customDetailViewModel.outputDetailData.value.userImages[index].id.stringValue) // realm 데이터를 통해서 파일에 새로운 데이터 저장
+                        let res = removeImageFromDocument(imageName: customDetailViewModel.outputDetailData.value.userImages[index].id.stringValue, fileName: fileName, noData: bool)
                         
                         switch res {
                         case .success(_):
@@ -189,22 +184,43 @@ extension CustomDetailViewController {
                         case .failure(let failure):
                             print(failure)
                         }
+                    } // File 이미지 삭제
+                    
+                    customDetailViewModel.inputDeleteImageTrigger.value = () // 조건 들어갈 시 Realm 내부의 이미지 삭제 및 그 만큼 이미지를 생성해준다.
+                    
+                    // 생성한 이미지를 파일에 저장하는 과정
+                    // 이미지를 삭제만 했는지의 여부를 파악
+                    if !customDetailViewModel.outputImageNoCreate.value {
+                        
+                        for index in (images.count - customDetailViewModel.outputImageCreateCount.value)...images.count - 1 {
+                            
+                            let res = saveImageToDocument(image: images[index], fileName: customDetailViewModel.outputDetailData.value.id.stringValue, imageName: customDetailViewModel.outputDetailData.value.userImages[index].id.stringValue) // realm 데이터를 통해서 파일에 새로운 데이터 저장
+                            
+                            switch res {
+                            case .success(_):
+                                print("success")
+                            case .failure(let failure):
+                                print(failure)
+                            }
+                        }
+                        
                     }
                     
                 } else {
-                    
+                    print("hehehehehhehe")
                     let detailData = customDetailViewModel.outputDetailData.value
-                    let addData = userImages.count - customDetailViewModel.outputDetailData.value.userImages.count
+                    let addData = images.count - customDetailViewModel.outputDetailData.value.userImages.count
                     
                     if addData == 0 {
                         rootVC.foodyMapViewModel.inputLocationValue.value = customDetailViewModel.inputLocation.value
                         self.navigationController?.popToRootViewController(animated: true)
                         return
                     }
-                    
+                    print(images.count)
                     customDetailViewModel.inputSaveImageCount.value = addData
+                    print(images.count)
                     // 삭제할 데이터 없이 추가만 한다면?
-                    for index in ((userImages.count - 1) - (addData - 1))...userImages.count - 1 {
+                    for index in (images.count - addData)...images.count - 1 {
                         
                         let res = saveImageToDocument(image: userImages[index], fileName: detailData.id.stringValue, imageName: detailData.userImages[index].id.stringValue)
                         
@@ -338,7 +354,7 @@ extension CustomDetailViewController: PHPickerViewControllerDelegate, UINavigati
                     
                     userImages.append(contentsOf: selectedImages)
                     
-                    mainView.marketDetailView.marketImageView.image = selectedImages[0]
+//                    mainView.marketDetailView.marketImageView.image = selectedImages[0]
                     picker.dismiss(animated: true, completion: nil)
                 }
                 

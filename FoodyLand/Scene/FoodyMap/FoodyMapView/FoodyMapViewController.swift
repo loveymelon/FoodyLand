@@ -38,11 +38,8 @@ final class FoodyMapViewController: BaseViewController<FoodyMapView> {
                 return
             }
             
-            print(result)
+            let location = CLLocationCoordinate2D(latitude: result[0], longitude: result[1])
             
-            let location = CLLocationCoordinate2D(latitude: result[1], longitude: result[0])
-            
-            print(result)
             let chang = FoodyMapMarker(title: "ddd", coordinate: location)
             
             self.mainView.mapView.addAnnotation(chang)

@@ -11,6 +11,9 @@ class FoodyMapViewModel {
     let outputLocationValue: Observable<[Double]> = Observable([])
     
     let inputLocationValue: Observable<Location?> = Observable(nil)
+    let inputViewDidLoadTrigger: Observable<Void?> = Observable(nil)
+    
+    let repository = RealmRepository()
     
     init() {
         inputLocationValue.bind { [weak self] result in
@@ -24,4 +27,7 @@ class FoodyMapViewModel {
     private func converValue(data: Location) {
         outputLocationValue.value = [data.latitude, data.longitude]
     }
+    
+    
+    
 }
