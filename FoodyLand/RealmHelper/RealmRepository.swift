@@ -34,7 +34,7 @@ class RealmRepository {
         }
     } // 카테고리를 만들 수도 있고 유저의 메모를 만들 수 있어서 제네릭으로 처리함, 이미지도 만들어야됨 순서는 카테고리 - 이미지 - 유저 메모 순으로 만들어야됨 유저메모를 만들때는 카테고리 유저 append를 시켜줘야된다.
     
-    func createUserDiary(location: Location, categoryItem: Category, detailData: DetailData, marketItem: UserDiary) -> RealmResult {
+    func createUserDiary(location: Location, categoryItem: Category?, detailData: DetailData, marketItem: UserDiary) -> RealmResult {
         
         do {
             try realm.write {
@@ -54,9 +54,11 @@ class RealmRepository {
         
     }
     
-    func fetchCategoryItem(index: Int) -> Category {
+    func fetchCategoryItem(index: Int?) -> Category? {
+        guard let num = index else { return nil }
+        
         let item = realm.objects(Category.self)
-        let res = item[(item.count - 1) - index]
+        let res = item[(item.count - 1) - num]
         
         return res
     }
@@ -67,7 +69,7 @@ class RealmRepository {
         return .success(items)
     } // 카테고리를 가져올 수도 있고 유저의 메모들을 가져올 수도 있기 때문에
     
-    func updateItem(marketItem: UserDiary, categoryItem: Category, locationData: Location, detailData: DetailData) -> Result<(), RealmError> { // viewModel에서 값 비교후 다른게 있다면
+    func updateItem(marketItem: UserDiary, categoryItem: Category?, locationData: Location, detailData: DetailData) -> Result<(), RealmError> { // viewModel에서 값 비교후 다른게 있다면
         let items = realm.objects(UserDiary.self) // 업데이트를 할때 몇 번째에 있는 데이터를 업데이트할 지 어떻게 알 수 있을까? 레코드들은 리스트형식으로 있는데 인덱스에 어떻게 접근할지 고민해보자.
         // 마켓의 고유 아이디로 접근할 수 있지 않을까? 이미지를 수정할때도 where문에서 마켓 고유 아이디랑 일치한 테이블을 가져와서 거기에 있는 이미지를 수정하는 것이다.
         
@@ -149,9 +151,11 @@ class RealmRepository {
     }
     
     func checkData(location: Location) -> Results<UserDiary> {
+//        print(location)
         let predicate = NSPredicate(format: "location.latitude == %lf AND location.longitude == %lf", location.latitude, location.longitude)
         let item = realm.objects(UserDiary.self).filter(predicate)
-        
+        print("addfasasdf")
+        print(item, item.count)
         return item
     }
     
@@ -208,6 +212,19 @@ class RealmRepository {
         
         return item[0].userImages
         
+    }
+    
+    func fetchLocationValue() -> [Location] {
+        let items = realm.objects(UserDiary.self)
+        var locationArr: [Location] = []
+        
+        for item in items {
+            guard let location = item.location else { return [Location()] }
+            
+            locationArr.append(location)
+        }
+        
+        return locationArr
     }
     
 }

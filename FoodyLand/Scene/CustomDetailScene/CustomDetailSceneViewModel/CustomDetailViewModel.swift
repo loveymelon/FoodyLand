@@ -118,9 +118,7 @@ class CustomDetailViewModel {
     private func saveDetailData(data: DetailData) {
         let realmData = outputDetailData.value
         
-        guard let index = selectedIndex else { return }
-        
-        let categoryData = repository.fetchCategoryItem(index: index)
+        let categoryData = repository.fetchCategoryItem(index: selectedIndex)
         
         let location = inputLocation.value
         
@@ -142,8 +140,6 @@ class CustomDetailViewModel {
             
         } else {
             let realmData = outputDetailData.value
-            
-            let categoryData = repository.fetchCategoryItem(index: index)
             
             let res = repository.createUserDiary(location: inputLocation.value, categoryItem: categoryData, detailData: data, marketItem: realmData)
             switch res {

@@ -81,6 +81,12 @@ extension SearchViewController {
         snapshot.appendSections(Section.allCases)
         snapshot.appendItems(value)
         
+        if !value.isEmpty {
+            mainView.collectionView.isScrollEnabled = true
+        } else {
+            mainView.collectionView.isScrollEnabled = false
+        }
+        
         dataSource?.apply(snapshot, animatingDifferences: true)
     }
 }

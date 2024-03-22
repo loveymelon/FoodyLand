@@ -18,4 +18,6 @@ final class FoodyMapMarker: NSObject, MKAnnotation {
         
         super.init()
     }
+    
+    
 }

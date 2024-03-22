@@ -54,6 +54,7 @@
 		DF7C2C102BA1D11C0014BB21 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C2C0F2BA1D11C0014BB21 /* Date+Extension.swift */; };
 		DF7C2C132BA206560014BB21 /* FoodyMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C2C122BA206560014BB21 /* FoodyMapViewModel.swift */; };
 		DF7D469F2B9CC1B100C76C1F /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7D469E2B9CC1B100C76C1F /* String+Extension.swift */; };
+		DF8184032BADEAEE00D46A6B /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DF8184022BADEAEE00D46A6B /* IQKeyboardManagerSwift */; };
 		DF82E89D2B9A1DB000838549 /* FoodyMapMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82E89C2B9A1DB000838549 /* FoodyMapMarker.swift */; };
 		DF82E89F2B9A216200838549 /* ReusableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82E89E2B9A216200838549 /* ReusableProtocol.swift */; };
 		DF82E8A12B9A220900838549 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82E8A02B9A220900838549 /* UIView+Extension.swift */; };
@@ -136,6 +137,7 @@
 				DF71CA162B999BDC00D5983C /* RealmSwift in Frameworks */,
 				DF71CA1C2B999BFB00D5983C /* Toast in Frameworks */,
 				DF3D88762B99A2460000C3C9 /* FirebaseCrashlytics in Frameworks */,
+				DF8184032BADEAEE00D46A6B /* IQKeyboardManagerSwift in Frameworks */,
 				DF01C6A52BA06D7E00BBA5D3 /* FloatingPanel in Frameworks */,
 				DF3D88742B99A2460000C3C9 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				DF01C69D2BA0598E00BBA5D3 /* FSCalendar in Frameworks */,
@@ -407,6 +409,7 @@
 				DF836CF22B9E188E0036649C /* Cosmos */,
 				DF01C69C2BA0598E00BBA5D3 /* FSCalendar */,
 				DF01C6A42BA06D7E00BBA5D3 /* FloatingPanel */,
+				DF8184022BADEAEE00D46A6B /* IQKeyboardManagerSwift */,
 			);
 			productName = FoodyLand;
 			productReference = DF71C9E22B999A0900D5983C /* FoodyLand.app */;
@@ -446,6 +449,7 @@
 				DF836CF12B9E188E0036649C /* XCRemoteSwiftPackageReference "Cosmos" */,
 				DF01C69B2BA0598E00BBA5D3 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 				DF01C6A32BA06D7E00BBA5D3 /* XCRemoteSwiftPackageReference "FloatingPanel" */,
+				DF8184012BADEAED00D46A6B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = DF71C9E32B999A0900D5983C /* Products */;
 			projectDirPath = "";
@@ -853,6 +857,14 @@
 				minimumVersion = 5.1.0;
 			};
 		};
+		DF8184012BADEAED00D46A6B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.2;
+			};
+		};
 		DF836CF12B9E188E0036649C /* XCRemoteSwiftPackageReference "Cosmos" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/evgenyneu/Cosmos.git";
@@ -918,6 +930,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DF71CA1A2B999BFB00D5983C /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
+		};
+		DF8184022BADEAEE00D46A6B /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DF8184012BADEAED00D46A6B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 		DF836CF22B9E188E0036649C /* Cosmos */ = {
 			isa = XCSwiftPackageProductDependency;

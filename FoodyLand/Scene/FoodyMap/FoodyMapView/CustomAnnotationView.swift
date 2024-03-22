@@ -12,6 +12,7 @@ import Then
 final class CustomAnnotationView: MKAnnotationView {
     
     let imageView = UIImageView()
+    var ddddd: String = ""
     
     override init(annotation: (any MKAnnotation)?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
@@ -47,7 +48,8 @@ final class CustomAnnotationView: MKAnnotationView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        centerOffset = CGPoint(x: -25, y: -30)
+        centerOffset = CGPoint(x: 0, y: -10)
+        bounds.size = CGSize(width: 50, height: 50)
     } // layoutSubViews에 왜 선언을 하는 걸까?
     
 }

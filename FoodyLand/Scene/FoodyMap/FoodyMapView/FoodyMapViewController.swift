@@ -9,6 +9,7 @@ import UIKit
 import CoreLocation
 import MapKit
 import Toast
+import FloatingPanel
 
 enum UnknownError: Error {
     case unowned
@@ -23,6 +24,7 @@ final class FoodyMapViewController: BaseViewController<FoodyMapView> {
         super.viewDidLoad()
 
         checkDeviceLocationAuthorization()
+        foodyMapViewModel.inputViewDidLoadTrigger.value = ()
     }
     
     override func dataSourceDelegate() {
@@ -38,11 +40,17 @@ final class FoodyMapViewController: BaseViewController<FoodyMapView> {
                 return
             }
             
-            let location = CLLocationCoordinate2D(latitude: result[0], longitude: result[1])
+            for location in result {
+                
+                print(#function)
+                
+                let location = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+                
+                let marker = FoodyMapMarker(title: "Here", coordinate: location)
+
+                self.mainView.mapView.addAnnotation(marker)
+            }
             
-            let chang = FoodyMapMarker(title: "ddd", coordinate: location)
-            
-            self.mainView.mapView.addAnnotation(chang)
         }
     }
 
@@ -156,7 +164,7 @@ extension FoodyMapViewController: MKMapViewDelegate {
                 reuseIdentifier: CustomAnnotationView.identifier
             ) 
             view.canShowCallout = true
-            view.calloutOffset = CGPoint(x: -10, y: 10)
+            view.calloutOffset = CGPoint(x: 0, y: 0)
             view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
         
@@ -164,23 +172,35 @@ extension FoodyMapViewController: MKMapViewDelegate {
         
     } // custom View
     
-//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-//        let annotation = MKPointAnnotation()
-//        print(mapView.region.center)
-//        
-//        annotation.title = "Here"
-//        annotation.coordinate = mapView.region.center
-//        
-//        self.mainView.mapView.addAnnotation(annotation)
-//    }
+    func mapView(_ mapView: MKMapView, didSelect annotation: any MKAnnotation) {
+        print(#function)
+        
+        let annotationLocation = annotation.coordinate
+        
+        let location = Location()
+        location.latitude = annotationLocation.latitude
+        location.longitude = annotationLocation.longitude
+        
+        foodyMapViewModel.inputTappedAnnoTrigger.value = location
+        
+        let customDetailVC = CustomDetailViewController()
+        
+        let detailData = foodyMapViewModel.outputDetailData.value
+        
+        customDetailVC.customDetailViewModel.inputLocation.value = location
+        
+        let nav = UINavigationController(rootViewController: customDetailVC)
+        
+        self.present(nav, animated: true)
+    }
+    
+    
     
 }
 
 extension FoodyMapViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         // 누르면 서치화면이 있는 곳으로 이동
-        print(#function)
-        
         let vc = SearchViewController()
         
         self.navigationController?.pushViewController(vc, animated: true)
