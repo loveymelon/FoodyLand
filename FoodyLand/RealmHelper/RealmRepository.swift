@@ -227,4 +227,22 @@ class RealmRepository {
         return locationArr
     }
     
+    func deleteAll() -> RealmResult {
+        let userItem = realm.objects(UserDiary.self)
+        let categoryItem = realm.objects(Category.self)
+        let userImagesItem = realm.objects(UserImages.self)
+        
+        do {
+            try realm.write {
+                realm.delete(userImagesItem)
+                realm.delete(categoryItem)
+                realm.delete(userItem)
+            }
+        } catch {
+            return .failure(.deleteFail)
+        }
+        
+        return .success(())
+    }
+    
 }

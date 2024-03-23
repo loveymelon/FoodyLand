@@ -28,6 +28,8 @@
 		DF6A01D52B9B75E20047E4B0 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6A01D42B9B75E20047E4B0 /* NetworkError.swift */; };
 		DF6F87842BAED47000FEA418 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F87832BAED47000FEA418 /* WebViewController.swift */; };
 		DF6F87862BAED96200FEA418 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F87852BAED96200FEA418 /* WebView.swift */; };
+		DF6F87892BAF017200FEA418 /* SettingViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F87882BAF017200FEA418 /* SettingViewViewController.swift */; };
+		DF6F878B2BAF018000FEA418 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F878A2BAF018000FEA418 /* SettingView.swift */; };
 		DF71C9E62B999A0900D5983C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF71C9E52B999A0900D5983C /* AppDelegate.swift */; };
 		DF71C9E82B999A0900D5983C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF71C9E72B999A0900D5983C /* SceneDelegate.swift */; };
 		DF71C9ED2B999A0900D5983C /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DF71C9EC2B999A0900D5983C /* Base */; };
@@ -60,6 +62,8 @@
 		DF82E89D2B9A1DB000838549 /* FoodyMapMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82E89C2B9A1DB000838549 /* FoodyMapMarker.swift */; };
 		DF82E89F2B9A216200838549 /* ReusableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82E89E2B9A216200838549 /* ReusableProtocol.swift */; };
 		DF82E8A12B9A220900838549 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82E8A02B9A220900838549 /* UIView+Extension.swift */; };
+		DF83355C2BAF2A0200E0DE6E /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF83355B2BAF2A0200E0DE6E /* SettingViewModel.swift */; };
+		DF8335632BAF2D7A00E0DE6E /* SettingEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8335622BAF2D7A00E0DE6E /* SettingEnum.swift */; };
 		DF836CEB2B9DB0AC0036649C /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF836CEA2B9DB0AC0036649C /* SearchCollectionViewCell.swift */; };
 		DF836CEE2B9E175E0036649C /* CustomDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF836CED2B9E175E0036649C /* CustomDetailViewController.swift */; };
 		DF836CF02B9E17A90036649C /* CustomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF836CEF2B9E17A90036649C /* CustomDetailView.swift */; };
@@ -88,6 +92,8 @@
 		DF6A01D42B9B75E20047E4B0 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		DF6F87832BAED47000FEA418 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		DF6F87852BAED96200FEA418 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		DF6F87882BAF017200FEA418 /* SettingViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewViewController.swift; sourceTree = "<group>"; };
+		DF6F878A2BAF018000FEA418 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		DF71C9E22B999A0900D5983C /* FoodyLand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodyLand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF71C9E52B999A0900D5983C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF71C9E72B999A0900D5983C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +122,8 @@
 		DF82E89C2B9A1DB000838549 /* FoodyMapMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodyMapMarker.swift; sourceTree = "<group>"; };
 		DF82E89E2B9A216200838549 /* ReusableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableProtocol.swift; sourceTree = "<group>"; };
 		DF82E8A02B9A220900838549 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		DF83355B2BAF2A0200E0DE6E /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		DF8335622BAF2D7A00E0DE6E /* SettingEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingEnum.swift; sourceTree = "<group>"; };
 		DF836CEA2B9DB0AC0036649C /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		DF836CED2B9E175E0036649C /* CustomDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDetailViewController.swift; sourceTree = "<group>"; };
 		DF836CEF2B9E17A90036649C /* CustomDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDetailView.swift; sourceTree = "<group>"; };
@@ -226,6 +234,9 @@
 		DF6F87872BAEFEF200FEA418 /* SettingScene */ = {
 			isa = PBXGroup;
 			children = (
+				DF8335612BAF2CA200E0DE6E /* SettingModel */,
+				DF83355E2BAF2A1300E0DE6E /* SettingViewModel */,
+				DF83355D2BAF2A0700E0DE6E /* SettingView */,
 			);
 			path = SettingScene;
 			sourceTree = "<group>";
@@ -353,6 +364,31 @@
 				DF733C832B9D501600CC0B93 /* SearchViewModel */,
 			);
 			path = SearchScene;
+			sourceTree = "<group>";
+		};
+		DF83355D2BAF2A0700E0DE6E /* SettingView */ = {
+			isa = PBXGroup;
+			children = (
+				DF6F87882BAF017200FEA418 /* SettingViewViewController.swift */,
+				DF6F878A2BAF018000FEA418 /* SettingView.swift */,
+			);
+			path = SettingView;
+			sourceTree = "<group>";
+		};
+		DF83355E2BAF2A1300E0DE6E /* SettingViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DF83355B2BAF2A0200E0DE6E /* SettingViewModel.swift */,
+			);
+			path = SettingViewModel;
+			sourceTree = "<group>";
+		};
+		DF8335612BAF2CA200E0DE6E /* SettingModel */ = {
+			isa = PBXGroup;
+			children = (
+				DF8335622BAF2D7A00E0DE6E /* SettingEnum.swift */,
+			);
+			path = SettingModel;
 			sourceTree = "<group>";
 		};
 		DF836CEC2B9E17280036649C /* CustomDetailScene */ = {
@@ -535,6 +571,7 @@
 				DF89A61B2BA41CC50032CA57 /* UITextField+Extension.swift in Sources */,
 				DF6F87862BAED96200FEA418 /* WebView.swift in Sources */,
 				DF733C822B9D46C600CC0B93 /* SearchViewController.swift in Sources */,
+				DF6F878B2BAF018000FEA418 /* SettingView.swift in Sources */,
 				DF82E8A12B9A220900838549 /* UIView+Extension.swift in Sources */,
 				DF1709402B99BF55002594AF /* UIViewController+Extension.swift in Sources */,
 				DF96128C2BA6979F00419511 /* FileManager+Extension.swift in Sources */,
@@ -565,9 +602,12 @@
 				DF71C9E82B999A0900D5983C /* SceneDelegate.swift in Sources */,
 				DF71CA062B999AF800D5983C /* BaseViewController.swift in Sources */,
 				DF6A01CB2B9B51C60047E4B0 /* NetworkAPI.swift in Sources */,
+				DF6F87892BAF017200FEA418 /* SettingViewViewController.swift in Sources */,
+				DF8335632BAF2D7A00E0DE6E /* SettingEnum.swift in Sources */,
 				DF01C6A02BA059D700BBA5D3 /* CalendarViewController.swift in Sources */,
 				DF7421FF2BA31C790097A5DB /* CategoryView.swift in Sources */,
 				DF71CA092B999B4000D5983C /* ConfigureUIProtocol.swift in Sources */,
+				DF83355C2BAF2A0200E0DE6E /* SettingViewModel.swift in Sources */,
 				DF0542702B9B34B4009BC6AB /* CustomAnnotationView.swift in Sources */,
 				DF6A01D52B9B75E20047E4B0 /* NetworkError.swift in Sources */,
 				DF71CA002B999ACA00D5983C /* FoodyMapView.swift in Sources */,

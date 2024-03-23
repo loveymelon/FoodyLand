@@ -95,4 +95,20 @@ extension UIViewController {
         
         return .success(())
     }
+    
+    func removeImageFile(fileName: String) -> FileResult {
+        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return .failure(.noDocument) }
+        
+        let directoryURL = documentDirectory.appendingPathComponent(fileName)
+        
+        do {
+            if FileManager.default.fileExists(atPath: directoryURL.path()) {
+                try FileManager.default.removeItem(at: directoryURL)
+            }
+        } catch {
+            return .failure(.fileNoExist)
+        }
+        
+        return .success(())
+    }
 }
