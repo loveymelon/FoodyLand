@@ -53,22 +53,26 @@ extension SettingViewViewController: UITableViewDelegate, UITableViewDataSource 
         cell.textLabel?.font = .systemFont(ofSize: 20)
         cell.backgroundColor = .customYellow
         cell.imageView?.image = UIImage(systemName: "star")
+        cell.selectionStyle = .gray
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch SettingEnum.allCases[indexPath.row] {
-        case .notice :
-            print("c")
-        case .help :
-            print("b")
-        case .qa :
-            print("a")
+        case .notice, .help, .qa:
+            tableView.deselectRow(at: indexPath, animated: true)
+            let webVC = WebViewController()
+            
+            webVC.url = "https://www.notion.so/77292ae6c88e43be9dfa014edca42ea6"
+            
+            self.present(webVC, animated: true)
         case .reset :
+            tableView.deselectRow(at: indexPath, animated: true)
             settingViewModel.inputDeleteTrigger.value = ()
         }
     }
+    
     
 }
 

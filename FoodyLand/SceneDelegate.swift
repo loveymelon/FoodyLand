@@ -23,7 +23,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let nav = UINavigationController(rootViewController: SettingViewViewController())
         
-        window?.rootViewController = nav
+        let foodyMapNav = UINavigationController(rootViewController: FoodyMapViewController())
+        let settingNav = UINavigationController(rootViewController: SettingViewViewController())
+        
+        let tabBarController = UITabBarController()
+        
+        tabBarController.viewControllers = [foodyMapNav, settingNav]
+        tabBarController.tabBar.tintColor = .lightGray
+        
+        
+        if let items = tabBarController.tabBar.items {
+            for index in 0 ..< items.count {
+                items[index].image = TabBarEnum.allCases[index].images
+            }
+        }
+        
+        window?.rootViewController = tabBarController
         
         window?.makeKeyAndVisible()
     }

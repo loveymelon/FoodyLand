@@ -64,6 +64,7 @@
 		DF82E8A12B9A220900838549 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF82E8A02B9A220900838549 /* UIView+Extension.swift */; };
 		DF83355C2BAF2A0200E0DE6E /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF83355B2BAF2A0200E0DE6E /* SettingViewModel.swift */; };
 		DF8335632BAF2D7A00E0DE6E /* SettingEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8335622BAF2D7A00E0DE6E /* SettingEnum.swift */; };
+		DF8335652BAF3D8A00E0DE6E /* TabBarEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8335642BAF3D8A00E0DE6E /* TabBarEnum.swift */; };
 		DF836CEB2B9DB0AC0036649C /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF836CEA2B9DB0AC0036649C /* SearchCollectionViewCell.swift */; };
 		DF836CEE2B9E175E0036649C /* CustomDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF836CED2B9E175E0036649C /* CustomDetailViewController.swift */; };
 		DF836CF02B9E17A90036649C /* CustomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF836CEF2B9E17A90036649C /* CustomDetailView.swift */; };
@@ -124,6 +125,7 @@
 		DF82E8A02B9A220900838549 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		DF83355B2BAF2A0200E0DE6E /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		DF8335622BAF2D7A00E0DE6E /* SettingEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingEnum.swift; sourceTree = "<group>"; };
+		DF8335642BAF3D8A00E0DE6E /* TabBarEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarEnum.swift; sourceTree = "<group>"; };
 		DF836CEA2B9DB0AC0036649C /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		DF836CED2B9E175E0036649C /* CustomDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDetailViewController.swift; sourceTree = "<group>"; };
 		DF836CEF2B9E17A90036649C /* CustomDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDetailView.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				DF71C9F32B999A0C00D5983C /* Info.plist */,
 				DF1709472B99E4E8002594AF /* Observable.swift */,
 				DF6A01D22B9B729F0047E4B0 /* APIKey.swift */,
+				DF8335642BAF3D8A00E0DE6E /* TabBarEnum.swift */,
 			);
 			path = FoodyLand;
 			sourceTree = "<group>";
@@ -589,6 +592,7 @@
 				DF17094A2B99E502002594AF /* SearchViewModel.swift in Sources */,
 				DF71CA042B999AEB00D5983C /* BaseView.swift in Sources */,
 				DF6F87842BAED47000FEA418 /* WebViewController.swift in Sources */,
+				DF8335652BAF3D8A00E0DE6E /* TabBarEnum.swift in Sources */,
 				DF733C802B9D46BA00CC0B93 /* SearchView.swift in Sources */,
 				DF836CF02B9E17A90036649C /* CustomDetailView.swift in Sources */,
 				DF1709482B99E4E8002594AF /* Observable.swift in Sources */,
