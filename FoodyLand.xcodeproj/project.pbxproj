@@ -26,6 +26,8 @@
 		DF6A01D12B9B65640047E4B0 /* KeywordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6A01D02B9B65640047E4B0 /* KeywordModel.swift */; };
 		DF6A01D32B9B72A00047E4B0 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6A01D22B9B729F0047E4B0 /* APIKey.swift */; };
 		DF6A01D52B9B75E20047E4B0 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6A01D42B9B75E20047E4B0 /* NetworkError.swift */; };
+		DF6F87842BAED47000FEA418 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F87832BAED47000FEA418 /* WebViewController.swift */; };
+		DF6F87862BAED96200FEA418 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F87852BAED96200FEA418 /* WebView.swift */; };
 		DF71C9E62B999A0900D5983C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF71C9E52B999A0900D5983C /* AppDelegate.swift */; };
 		DF71C9E82B999A0900D5983C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF71C9E72B999A0900D5983C /* SceneDelegate.swift */; };
 		DF71C9ED2B999A0900D5983C /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DF71C9EC2B999A0900D5983C /* Base */; };
@@ -84,6 +86,8 @@
 		DF6A01D02B9B65640047E4B0 /* KeywordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordModel.swift; sourceTree = "<group>"; };
 		DF6A01D22B9B729F0047E4B0 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		DF6A01D42B9B75E20047E4B0 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		DF6F87832BAED47000FEA418 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		DF6F87852BAED96200FEA418 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		DF71C9E22B999A0900D5983C /* FoodyLand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodyLand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF71C9E52B999A0900D5983C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF71C9E72B999A0900D5983C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -210,6 +214,22 @@
 			path = FoodyMapView;
 			sourceTree = "<group>";
 		};
+		DF6F87822BAED44F00FEA418 /* WebScene */ = {
+			isa = PBXGroup;
+			children = (
+				DF6F87832BAED47000FEA418 /* WebViewController.swift */,
+				DF6F87852BAED96200FEA418 /* WebView.swift */,
+			);
+			path = WebScene;
+			sourceTree = "<group>";
+		};
+		DF6F87872BAEFEF200FEA418 /* SettingScene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SettingScene;
+			sourceTree = "<group>";
+		};
 		DF71C9D92B999A0900D5983C = {
 			isa = PBXGroup;
 			children = (
@@ -262,6 +282,8 @@
 		DF71C9FC2B999AA800D5983C /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				DF6F87872BAEFEF200FEA418 /* SettingScene */,
+				DF6F87822BAED44F00FEA418 /* WebScene */,
 				DF7421FB2BA31BB00097A5DB /* CategoryScene */,
 				DF01C69E2BA059BD00BBA5D3 /* CalendarScene */,
 				DF836CEC2B9E17280036649C /* CustomDetailScene */,
@@ -511,6 +533,7 @@
 				DF733C862B9D50D600CC0B93 /* NetworkManager.swift in Sources */,
 				DF82E89D2B9A1DB000838549 /* FoodyMapMarker.swift in Sources */,
 				DF89A61B2BA41CC50032CA57 /* UITextField+Extension.swift in Sources */,
+				DF6F87862BAED96200FEA418 /* WebView.swift in Sources */,
 				DF733C822B9D46C600CC0B93 /* SearchViewController.swift in Sources */,
 				DF82E8A12B9A220900838549 /* UIView+Extension.swift in Sources */,
 				DF1709402B99BF55002594AF /* UIViewController+Extension.swift in Sources */,
@@ -528,6 +551,7 @@
 				DF7422012BA332490097A5DB /* CategoryViewModel.swift in Sources */,
 				DF17094A2B99E502002594AF /* SearchViewModel.swift in Sources */,
 				DF71CA042B999AEB00D5983C /* BaseView.swift in Sources */,
+				DF6F87842BAED47000FEA418 /* WebViewController.swift in Sources */,
 				DF733C802B9D46BA00CC0B93 /* SearchView.swift in Sources */,
 				DF836CF02B9E17A90036649C /* CustomDetailView.swift in Sources */,
 				DF1709482B99E4E8002594AF /* Observable.swift in Sources */,

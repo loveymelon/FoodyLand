@@ -53,6 +53,7 @@ class MarketDetailView: BaseView {
         $0.text = "aaa"
         $0.textAlignment = .center
         $0.font = .boldSystemFont(ofSize: 16)
+        $0.isUserInteractionEnabled = true
     }
     
     let marketURLStackView = UIStackView().then {

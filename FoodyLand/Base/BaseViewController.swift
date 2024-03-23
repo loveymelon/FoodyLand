@@ -29,9 +29,14 @@ class BaseViewController<T: BaseView>: UIViewController {
     }
     
     func configureNav() {
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.backgroundColor = .customYellow
+        
         self.navigationController?.navigationItem.titleView?.tintColor = .black
-        self.navigationController?.navigationBar.topItem?.title = ""
         self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.topItem?.title = ""
+        navigationController?.navigationBar.standardAppearance = navigationBarAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
     }
     
     func bindData() {

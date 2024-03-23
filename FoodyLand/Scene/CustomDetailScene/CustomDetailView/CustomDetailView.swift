@@ -90,6 +90,7 @@ final class CustomDetailView: BaseView {
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.lightGray.cgColor
         $0.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 0)
+        $0.backgroundColor = .white
     }
     
     let saveButton: UIButton = {

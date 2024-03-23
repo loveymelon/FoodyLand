@@ -31,7 +31,7 @@ final class CustomDetailViewController: BaseViewController<CustomDetailView> {
     }
     
     let customDetailViewModel = CustomDetailViewModel()
-    var userImages: [UIImage] = [] {
+    private var userImages: [UIImage] = [] {
         didSet {
             mainView.marketDetailView.pageControl.numberOfPages = userImages.count
             customDetailViewModel.inputUserImageCount.value = userImages.count
@@ -66,6 +66,18 @@ final class CustomDetailViewController: BaseViewController<CustomDetailView> {
 
     }
     
+    @objc func tappedUrlLabel() {
+        let webVC = WebViewController()
+        
+        print(#function)
+        
+        guard let url = mainView.marketDetailView.marketURLLabel.text else { return }
+        
+        webVC.url = url
+        
+        self.present(webVC, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -80,7 +92,7 @@ final class CustomDetailViewController: BaseViewController<CustomDetailView> {
     override func bindData() {
         customDetailViewModel.outputDetailData.bind { [weak self] result in
             guard let self = self else { return }
-            print(#function)
+            
             
             customDetailViewModel.inputUserImageCount.value = result.userImages.count
             
@@ -100,12 +112,13 @@ final class CustomDetailViewController: BaseViewController<CustomDetailView> {
                 userImages = []
             }
             
+            navigationItem.title = result.marketName
             mainView.marketDetailView.marketTitleLabel.text = result.marketName
             mainView.marketDetailView.marketURLLabel.text = result.url
             mainView.marketDetailView.marketAddLabel.text = result.address
             mainView.calendarLabel.text = result.date.toString()
             mainView.memoTextView.text = result.memo
-            mainView.categoryLabel.text = result.category?.categoryName
+            mainView.categoryLabel.text = result.category?.categoryName ?? "카테고리"
         }
         
         customDetailViewModel.outputCalendarData.bind { [weak self] result in
@@ -164,13 +177,17 @@ extension CustomDetailViewController {
             
             mainView.marketDetailView.marketImageView.image = userImages[mainView.marketDetailView.pageControl.currentPage]
         }), for: .valueChanged)
+        
+        var urlLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedUrlLabel))
+        
+        mainView.marketDetailView.marketURLLabel.addGestureRecognizer(urlLabelTapGesture)
     }
     
     private func saveDatas() {
         let images = userImages // 지속적으로 realm을 업데이트하고 fetch를 할때 bind가 이뤄져서 값이 달라지므로 저장해서 이 값을 쓰는 것이다.
         // 굳이 Realm을 업데이트하고 바로 fetch를 할 필요가 없다 인스턴스만 생성해서 그 id값으로 파일 매니저를 다루고 마지막에 업데이트 시키면 된다. 이건 나중에 리팩토링할때 반영하자
         
-        customDetailViewModel.detailData = DetailData(memo: mainView.memoTextView.text, star: mainView.starView.rating, calender: mainView.calendarLabel.text ?? "", category: mainView.categoryLabel.text ?? "")
+        customDetailViewModel.detailData = DetailData(memo: mainView.memoTextView.text, star: mainView.starView.rating, calender: mainView.calendarLabel.text ?? "")
         
         customDetailViewModel.inputSaveButtonTrigger.value = ()
         

@@ -28,12 +28,15 @@ final class SearchViewController: BaseViewController<SearchView> {
         configureDataSource()
         snapShot(value: [])
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.title = "맛집 검색"
+    }
 
     override func configureNav() {
         super.configureNav()
         
         self.navigationItem.searchController = searchController
-        self.navigationItem.title = "맛집 검색"
         self.navigationItem.hidesSearchBarWhenScrolling = false
         
         self.navigationController?.navigationBar.backgroundColor = .customYellow

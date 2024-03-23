@@ -11,7 +11,6 @@ struct DetailData {
     let memo: String
     let star: Double
     let calender: String
-    let category: String
 }
 
 class CustomDetailViewModel {
@@ -37,7 +36,7 @@ class CustomDetailViewModel {
     let inputCalendarData: Observable<Date?> = Observable(nil)
     let inputLocation: Observable<Location> = Observable(Location())
     
-    var detailData: DetailData = DetailData(memo: "", star: 0, calender: "", category: "")
+    var detailData: DetailData = DetailData(memo: "", star: 0, calender: "")
     
     private let repository = RealmRepository()
     var selectedIndex: Int? = nil

@@ -27,6 +27,14 @@ final class FoodyMapViewController: BaseViewController<FoodyMapView> {
         foodyMapViewModel.inputViewDidLoadTrigger.value = ()
     }
     
+    override func configureNav() {
+        let logoImageView = UIImageView()
+        
+        logoImageView.image = .foodyLogo
+        
+        self.navigationItem.titleView = logoImageView
+    }
+    
     override func dataSourceDelegate() {
         self.locationManager.delegate = self
         mainView.searchBar.delegate = self
@@ -195,13 +203,14 @@ extension FoodyMapViewController: MKMapViewDelegate {
     }
     
     
-    
 }
 
 extension FoodyMapViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         // 누르면 서치화면이 있는 곳으로 이동
         let vc = SearchViewController()
+        
+        self.view.endEditing(true)
         
         self.navigationController?.pushViewController(vc, animated: true)
     }
