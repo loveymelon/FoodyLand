@@ -10,6 +10,7 @@ import Foundation
 class FoodyMapViewModel {
     let outputLocationValue: Observable<[Location]> = Observable([])
     let outputDetailData: Observable<UserDiary> = Observable(UserDiary(marketId: "", marketName: "", address: "", url: "", star: 3, memo: "", date: Date(), category: nil))
+    let outputRemoveAll: Observable<Bool> = Observable(false)
     
     let inputLocationValue: Observable<Location?> = Observable(nil)
     let inputViewDidLoadTrigger: Observable<Void?> = Observable(nil)

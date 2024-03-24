@@ -29,8 +29,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tabBarController = UITabBarController()
         
         tabBarController.viewControllers = [foodyMapNav, settingNav]
-        tabBarController.tabBar.tintColor = .lightGray
+        tabBarController.tabBar.tintColor = .blue
         
+        let appearance = UITabBarAppearance()
+        
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .customYellow
+        
+        tabBarController.tabBar.standardAppearance = appearance
+        tabBarController.tabBar.scrollEdgeAppearance = appearance
         
         if let items = tabBarController.tabBar.items {
             for index in 0 ..< items.count {

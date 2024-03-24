@@ -12,6 +12,7 @@ final class SearchViewModel {
     let outputData: Observable<PageData> = Observable(PageData(isEnd: false, pageableCount: 0, total: 0, sameName: NameData(keyword: "")))
     let outputUserDiary: Observable<UserDiary> = Observable(UserDiary(marketId: "", marketName: "", address: "", url: "", star: 3.0, memo: "", date: Date(), category: nil))
     let outputLocation: Observable<Location> = Observable(Location())
+    let outputError: Observable<NetworkError?> = Observable(nil)
     
     let inputSearchText: Observable<String?> = Observable(nil)
     let inputPage: Observable<Int> = Observable(1)
@@ -58,7 +59,7 @@ final class SearchViewModel {
                 
                 outputData.value = success.meta
             case .failure(let failure):
-                print(failure)
+                outputError.value = failure
             }
         }
     }

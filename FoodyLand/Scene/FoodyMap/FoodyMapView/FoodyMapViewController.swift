@@ -22,8 +22,12 @@ final class FoodyMapViewController: BaseViewController<FoodyMapView> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         checkDeviceLocationAuthorization()
+//        foodyMapViewModel.inputViewDidLoadTrigger.value = ()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         foodyMapViewModel.inputViewDidLoadTrigger.value = ()
     }
     
@@ -42,21 +46,37 @@ final class FoodyMapViewController: BaseViewController<FoodyMapView> {
     }
     
     override func bindData() {
-        foodyMapViewModel.outputLocationValue.bind { result in
+        foodyMapViewModel.outputLocationValue.bind { [weak self] result in
+            
+            guard let self else { return }
             
             if result.isEmpty {
+                print("bbbbb")
+                mainView.mapView.removeAnnotations(mainView.mapView.annotations)
                 return
+            } else {
+                
+                for location in result {
+                    
+                    print("aaaaaaa")
+                    
+                    let location = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+                    
+                    let marker = FoodyMapMarker(title: "Here", coordinate: location)
+                    
+                    self.mainView.mapView.addAnnotation(marker)
+                    
+                }
             }
             
-            for location in result {
-                
-                print(#function)
-                
-                let location = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-                
-                let marker = FoodyMapMarker(title: "Here", coordinate: location)
-
-                self.mainView.mapView.addAnnotation(marker)
+        }
+        
+        foodyMapViewModel.outputRemoveAll.bind { [weak self] result in
+            guard let self else { return }
+            
+            if result {
+                mainView.mapView.removeAnnotations(mainView.mapView.annotations)
+                print(foodyMapViewModel.outputRemoveAll.value)
             }
             
         }
@@ -181,7 +201,8 @@ extension FoodyMapViewController: MKMapViewDelegate {
     } // custom View
     
     func mapView(_ mapView: MKMapView, didSelect annotation: any MKAnnotation) {
-        print(#function)
+        
+        guard !(annotation is MKUserLocation) else { return } // 유저 어노테이션 터치를 막는 것
         
         let annotationLocation = annotation.coordinate
         

@@ -7,9 +7,15 @@
 
 import UIKit
 
+//protocol DeleteAnnotation: AnyObject {
+//    func deleteAnnotation()
+//}
+
 class SettingViewViewController: BaseViewController<SettingView> {
 
     let settingViewModel = SettingViewModel()
+    
+//    var delegate: DeleteAnnotation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +39,7 @@ class SettingViewViewController: BaseViewController<SettingView> {
             guard let self else { return }
             guard !result.isEmpty else { return }
             
-            deleteData(id: result)
+            deleteData(id: result, userImages: settingViewModel.outputImageId.value)
         }
     }
     
@@ -52,7 +58,6 @@ extension SettingViewViewController: UITableViewDelegate, UITableViewDataSource 
         cell.textLabel?.text = SettingEnum.allCases[indexPath.row].title
         cell.textLabel?.font = .systemFont(ofSize: 20)
         cell.backgroundColor = .customYellow
-        cell.imageView?.image = UIImage(systemName: "star")
         cell.selectionStyle = .gray
         
         return cell
@@ -77,19 +82,22 @@ extension SettingViewViewController: UITableViewDelegate, UITableViewDataSource 
 }
 
 extension SettingViewViewController {
-    private func deleteData(id: [String]) {
+    private func deleteData(id: [String], userImages: [[UserImages]]) {
         
-        for item in id {
-            let result = removeImageFile(fileName: item)
+        for (idIndex, item) in id.enumerated() {
             
-            switch result {
-            case .success():
-                print("success")
-                settingViewModel.inputDeleteAllTrigger.value = ()
-            case .failure(let failuer):
-                print(failuer)
+            if !userImages[idIndex].isEmpty {
+                for (imageIndex, imageItem) in userImages[idIndex].enumerated() {
+                    let bool = imageIndex == userImages[idIndex].count - 1
+                    print(bool, imageIndex)
+                    let result = removeImageFromDocument(imageName: imageItem.id.stringValue, fileName: item, noData: bool)
+                }
             }
+            
         }
+        
+        settingViewModel.inputDeleteAllTrigger.value = ()
+        
         
     }
 }

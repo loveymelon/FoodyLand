@@ -52,7 +52,23 @@ final class SearchViewController: BaseViewController<SearchView> {
         searchViewModel.outputText.bind { [weak self] result in
             guard let self = self else { return }
             
+            mainView.noDataView.isHidden = true
+            mainView.collectionView.isHidden = false
+            
             snapShot(value: result)
+        }
+        
+        searchViewModel.outputError.bind { [weak self] result in
+            guard let self else { return }
+            guard let error = result else { return }
+            
+            if error == .invalidStatusCode(200) {
+                guard let text = searchController.searchBar.text else { return }
+                
+                mainView.noDataView.isHidden = false
+                mainView.collectionView.isHidden = true
+                mainView.noDataLabel.text = "\(text)의 검색 결과가 없습니다."
+            }
         }
     }
     
@@ -67,7 +83,7 @@ extension SearchViewController {
     
     private func configureDataSource() {
         let cellRegistration = UICollectionView.CellRegistration<SearchCollectionViewCell, Address>(handler: { cell, indexPath, itemIdentifier in
-            cell.locationMark.image = UIImage(systemName: "star")
+            cell.locationMark.image = .restaurant
             cell.titleLabel.text = itemIdentifier.placeName
             cell.addLabel.text = itemIdentifier.roadAddress
         })

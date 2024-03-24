@@ -14,7 +14,10 @@ class WebViewController: BaseViewController<WebView> {
     var url: String = "" {
         didSet {
             url = checkURL(url)
-            loadWebView(url: url)
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                loadWebView(url: url)
+            }
         }
     }
     

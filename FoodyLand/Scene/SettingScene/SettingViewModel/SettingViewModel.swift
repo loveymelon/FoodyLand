@@ -11,9 +11,12 @@ import RealmSwift
 class SettingViewModel {
     
     let outputDetailDatas: Observable<[String]> = Observable([])
+    let outputImageId: Observable<[[UserImages]]> = Observable([[UserImages()]])
     
     let inputDeleteTrigger: Observable<Void?> = Observable(nil)
     let inputDeleteAllTrigger: Observable<Void?> = Observable(nil)
+    
+    
     
     private let repository = RealmRepository()
     
@@ -36,14 +39,17 @@ class SettingViewModel {
     private func fetchUserDiary() {
         let result = repository.fetchItem(type: UserDiary.self)
         var idArr: [String] = []
+        var imageIds: [[UserImages]] = []
         
         switch result {
         case .success(let success):
             
-            for item in success {
+            for (index, item) in success.enumerated() {
                 idArr.append(item.id.stringValue)
+                imageIds.append(Array(item.userImages))
             }
             
+            outputImageId.value = imageIds
             outputDetailDatas.value = idArr
             
         case .failure(let failure):
