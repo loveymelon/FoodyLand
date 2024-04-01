@@ -21,10 +21,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: scene)
         
-        let nav = UINavigationController(rootViewController: SettingViewViewController())
+        let nav = UINavigationController(rootViewController: SettingViewController())
         
         let foodyMapNav = UINavigationController(rootViewController: FoodyMapViewController())
-        let settingNav = UINavigationController(rootViewController: SettingViewViewController())
+        let settingNav = UINavigationController(rootViewController: SettingViewController())
         
         let tabBarController = UITabBarController()
         

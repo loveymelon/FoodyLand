@@ -20,16 +20,16 @@ final class SearchViewModel {
     
     init() {
         inputSearchText.bind { [weak self] value in
-            guard let self = self else { return }
+            guard let self else { return }
             guard value != nil else { return }
     
             self.checkValue(text: value)
         }
         
         inputPage.bind { [weak self] page in
-            guard let self = self else { return }
+            guard let self else { return }
             
-            self.checkValue(text: self.inputSearchText.value, page: self.inputPage.value)
+            self.checkValue(text: inputSearchText.value, page: inputPage.value)
         }
         
         inputSelectedData.bind { [weak self] result in
@@ -45,7 +45,7 @@ final class SearchViewModel {
 //        self.outputText.value = text.matchString(text: text)
         NetworkAPI.shared.fetchKeyword(type: KeywordModel.self, api: NetworkManager.searchKeyword(text, page, 15)) { [weak self] response in
             
-            guard let self = self else { return }
+            guard let self else { return }
             
             switch response {
             case .success(let success):

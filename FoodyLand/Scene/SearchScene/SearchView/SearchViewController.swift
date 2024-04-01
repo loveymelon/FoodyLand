@@ -29,17 +29,21 @@ final class SearchViewController: BaseViewController<SearchView> {
         snapShot(value: [])
     }
     
+    deinit {
+        print("search deinit")
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationItem.title = "맛집 검색"
+        navigationItem.title = "맛집 검색"
     }
 
     override func configureNav() {
         super.configureNav()
         
-        self.navigationItem.searchController = searchController
-        self.navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
         
-        self.navigationController?.navigationBar.backgroundColor = .customYellow
+        navigationController?.navigationBar.backgroundColor = .customYellow
     }
     
     override func dataSourceDelegate() {

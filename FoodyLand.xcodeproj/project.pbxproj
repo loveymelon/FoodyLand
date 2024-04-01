@@ -28,7 +28,7 @@
 		DF6A01D52B9B75E20047E4B0 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6A01D42B9B75E20047E4B0 /* NetworkError.swift */; };
 		DF6F87842BAED47000FEA418 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F87832BAED47000FEA418 /* WebViewController.swift */; };
 		DF6F87862BAED96200FEA418 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F87852BAED96200FEA418 /* WebView.swift */; };
-		DF6F87892BAF017200FEA418 /* SettingViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F87882BAF017200FEA418 /* SettingViewViewController.swift */; };
+		DF6F87892BAF017200FEA418 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F87882BAF017200FEA418 /* SettingViewController.swift */; };
 		DF6F878B2BAF018000FEA418 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F878A2BAF018000FEA418 /* SettingView.swift */; };
 		DF71C9E62B999A0900D5983C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF71C9E52B999A0900D5983C /* AppDelegate.swift */; };
 		DF71C9E82B999A0900D5983C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF71C9E72B999A0900D5983C /* SceneDelegate.swift */; };
@@ -93,7 +93,7 @@
 		DF6A01D42B9B75E20047E4B0 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		DF6F87832BAED47000FEA418 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		DF6F87852BAED96200FEA418 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
-		DF6F87882BAF017200FEA418 /* SettingViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewViewController.swift; sourceTree = "<group>"; };
+		DF6F87882BAF017200FEA418 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		DF6F878A2BAF018000FEA418 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		DF71C9E22B999A0900D5983C /* FoodyLand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodyLand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF71C9E52B999A0900D5983C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -372,7 +372,7 @@
 		DF83355D2BAF2A0700E0DE6E /* SettingView */ = {
 			isa = PBXGroup;
 			children = (
-				DF6F87882BAF017200FEA418 /* SettingViewViewController.swift */,
+				DF6F87882BAF017200FEA418 /* SettingViewController.swift */,
 				DF6F878A2BAF018000FEA418 /* SettingView.swift */,
 			);
 			path = SettingView;
@@ -606,7 +606,7 @@
 				DF71C9E82B999A0900D5983C /* SceneDelegate.swift in Sources */,
 				DF71CA062B999AF800D5983C /* BaseViewController.swift in Sources */,
 				DF6A01CB2B9B51C60047E4B0 /* NetworkAPI.swift in Sources */,
-				DF6F87892BAF017200FEA418 /* SettingViewViewController.swift in Sources */,
+				DF6F87892BAF017200FEA418 /* SettingViewController.swift in Sources */,
 				DF8335632BAF2D7A00E0DE6E /* SettingEnum.swift in Sources */,
 				DF01C6A02BA059D700BBA5D3 /* CalendarViewController.swift in Sources */,
 				DF7421FF2BA31C790097A5DB /* CategoryView.swift in Sources */,
@@ -773,15 +773,16 @@
 				DEVELOPMENT_TEAM = QQ67S8HZ4F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FoodyLand/Info.plist;
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "위치 주세요";
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "위치 주세요";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 주세요";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앨범을 사용하도록 허용하겠습니까?";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "사용자의 주변 장소를 보다 명시적으로 나타내기 위해 현재 위치 정보를 수집하여, 위치 정보는 앱 내에서만 사용되고 저장되지 않습니다.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "사용자의 주변 장소를 보다 명시적으로 나타내기 위해 현재 위치 정보를 수집하여, 위치 정보는 앱 내에서만 사용되고 저장되지 않습니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자의 주변 장소를 보다 명시적으로 나타내기 위해 현재 위치 정보를 수집하여, 위치 정보는 앱 내에서만 사용되고 저장되지 않습니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진 저장을 위해서 권한을 허용해주세요. 선택하신 사진 정보는 앱 내에서만 사용됩니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -810,15 +811,16 @@
 				DEVELOPMENT_TEAM = QQ67S8HZ4F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FoodyLand/Info.plist;
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "위치 주세요";
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "위치 주세요";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 주세요";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앨범을 사용하도록 허용하겠습니까?";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "사용자의 주변 장소를 보다 명시적으로 나타내기 위해 현재 위치 정보를 수집하여, 위치 정보는 앱 내에서만 사용되고 저장되지 않습니다.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "사용자의 주변 장소를 보다 명시적으로 나타내기 위해 현재 위치 정보를 수집하여, 위치 정보는 앱 내에서만 사용되고 저장되지 않습니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자의 주변 장소를 보다 명시적으로 나타내기 위해 현재 위치 정보를 수집하여, 위치 정보는 앱 내에서만 사용되고 저장되지 않습니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진 저장을 위해서 권한을 허용해주세요. 선택하신 사진 정보는 앱 내에서만 사용됩니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

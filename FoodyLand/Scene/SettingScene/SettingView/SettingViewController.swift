@@ -1,5 +1,5 @@
 //
-//  SettingViewViewController.swift
+//  SettingViewController.swift
 //  FoodyLand
 //
 //  Created by 김진수 on 3/23/24.

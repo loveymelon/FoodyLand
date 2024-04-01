@@ -51,14 +51,11 @@ final class FoodyMapViewController: BaseViewController<FoodyMapView> {
             guard let self else { return }
             
             if result.isEmpty {
-                print("bbbbb")
                 mainView.mapView.removeAnnotations(mainView.mapView.annotations)
                 return
             } else {
                 
                 for location in result {
-                    
-                    print("aaaaaaa")
                     
                     let location = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
                     
@@ -162,7 +159,7 @@ extension FoodyMapViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("location", locations[0].coordinate)
+        
         guard let locationLast = locations.last?.coordinate else { 
             manager.stopUpdatingLocation()
             return

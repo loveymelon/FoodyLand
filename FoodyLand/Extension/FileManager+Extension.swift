@@ -18,7 +18,10 @@ enum FileError: Error {
 typealias FileResult = Result<Void, FileError>
 
 extension UIViewController {
+    // !!!
+    //
     func saveImageToDocument(image: UIImage, fileName: String, imageName: String) -> FileResult {
+        
         // 마켓 고유 아이디로 파일명을 잡고 이미지 이름은 이미지 테이블에서 생기는 고유 아이도.jpg로 생성
         guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return .failure(.noDocument) }
         

@@ -50,7 +50,7 @@ final class CustomAnnotationView: MKAnnotationView {
         
         centerOffset = CGPoint(x: 0, y: -10)
         bounds.size = CGSize(width: 50, height: 50)
-    } // layoutSubViews에 왜 선언을 하는 걸까?
+    }
     
 }
 

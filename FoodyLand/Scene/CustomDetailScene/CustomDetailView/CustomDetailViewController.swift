@@ -22,10 +22,7 @@ import IQKeyboardManagerSwift
 
 final class CustomDetailViewController: BaseViewController<CustomDetailView> {
     
-    lazy var fpVC = FloatingPanelController().then {
-        let calendarVC = CalendarViewController() // 이렇게 되면 CustomDetailViewController이 메모리에 올라올때 같이 올라온다 이걸 어떻게 수정할지 고민해보자
-        calendarVC.delegate = self
-        $0.set(contentViewController: calendarVC)
+    let fpVC = FloatingPanelController().then {
         $0.isRemovalInteractionEnabled = true
         $0.layout = MyFloatingPanelLayout()
     }
@@ -89,6 +86,10 @@ final class CustomDetailViewController: BaseViewController<CustomDetailView> {
         
     }
     
+    deinit {
+        print("deinit custom")
+    }
+    
     override func bindData() {
         customDetailViewModel.outputDetailData.bind { [weak self] result in
             guard let self = self else { return }
@@ -140,6 +141,11 @@ extension CustomDetailViewController {
     private func mainViewAddAction() {
         mainView.calendarButton.addAction(UIAction(handler: { [weak self] _ in
             guard let self = self else { return }
+            
+            let calendarVC = CalendarViewController()
+            
+            calendarVC.delegate = self
+            fpVC.set(contentViewController: calendarVC)
             
             fpVC.addPanel(toParent: self)
         }), for: .touchUpInside)
@@ -332,14 +338,13 @@ extension CustomDetailViewController {
 
 extension CustomDetailViewController: FloatingPanelControllerDelegate {
     func floatingPanel(_ fpc: FloatingPanelController, shouldRemoveAt location: CGPoint, with velocity: CGVector) -> Bool {
-//        fpc.removePanelFromParent(animated: true)
+        fpc.removePanelFromParent(animated: true)
         return true
     }
 }
 
 extension CustomDetailViewController: CalendarDataDelegate {
     func selectedDate(date: Date) {
-        print(date)
         customDetailViewModel.inputCalendarData.value = date
     }
 }

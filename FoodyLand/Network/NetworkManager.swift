@@ -7,6 +7,7 @@
 
 import Alamofire
 
+
 enum NetworkManager {
     
     case searchKeyword(String, Int, Int)
@@ -36,4 +37,7 @@ enum NetworkManager {
             return URLEncoding(destination: .queryString)
         }
     }
+    
+    
+    
 }
