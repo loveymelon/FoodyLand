@@ -11,7 +11,7 @@ import UIKit
 //    func deleteAnnotation()
 //}
 
-class SettingViewViewController: BaseViewController<SettingView> {
+class SettingViewController: BaseViewController<SettingView> {
 
     let settingViewModel = SettingViewModel()
     
@@ -45,7 +45,7 @@ class SettingViewViewController: BaseViewController<SettingView> {
     
 }
 
-extension SettingViewViewController: UITableViewDelegate, UITableViewDataSource {
+extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return SettingEnum.allCases.count
     }
@@ -81,7 +81,7 @@ extension SettingViewViewController: UITableViewDelegate, UITableViewDataSource 
     
 }
 
-extension SettingViewViewController {
+extension SettingViewController {
     private func deleteData(id: [String], userImages: [[UserImages]]) {
         
         for (idIndex, item) in id.enumerated() {
