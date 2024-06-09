@@ -23,7 +23,7 @@ class FoodyMapViewModel {
             guard let self else { return }
             guard let value = result else { return }
             
-            self.converValue(data: value)
+            converValue(data: value)
         }
         
         inputViewDidLoadTrigger.bind { [weak self] result in
@@ -42,12 +42,10 @@ class FoodyMapViewModel {
     }
     
     private func converValue(data: Location) {
-        print(#function)
         outputLocationValue.value = [data]
     }
     
     private func fetchLocationData() {
-        print(#function)
         let locations = repository.fetchLocationValue()
         
         outputLocationValue.value = locations

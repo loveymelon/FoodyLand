@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ConfigureUIProtocol {
-    func configureUI()
+    func configureUI() 
     func configureHierarchy()
     func configureLayout()
 }

@@ -67,8 +67,8 @@ extension SearchCollectionViewCell: ConfigureUIProtocol {
         }
         
         stackView.snp.makeConstraints { make in
-            make.verticalEdges.equalTo(self.contentView).inset(10)
-            make.leading.equalTo(self.locationMark.snp.trailing).offset(10)
+            make.verticalEdges.equalTo(contentView).inset(10)
+            make.leading.equalTo(locationMark.snp.trailing).offset(10)
         }
         
     }
