@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+// 인터페이스화
 protocol ConfigureUIProtocol {
     func configureUI() 
     func configureHierarchy()

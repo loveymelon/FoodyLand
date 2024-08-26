@@ -74,6 +74,7 @@
 		DF83960F2BA548B200889A19 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF83960E2BA548B200889A19 /* RealmRepository.swift */; };
 		DF84A05B2B9CD36C00B6601F /* UISearchBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF84A05A2B9CD36C00B6601F /* UISearchBar+Extension.swift */; };
 		DF89A61B2BA41CC50032CA57 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF89A61A2BA41CC50032CA57 /* UITextField+Extension.swift */; };
+		DF90F2052C7C666800D4FD87 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DF90F2042C7C666800D4FD87 /* README.md */; };
 		DF96128C2BA6979F00419511 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF96128B2BA6979F00419511 /* FileManager+Extension.swift */; };
 /* End PBXBuildFile section */
 
@@ -134,6 +135,7 @@
 		DF83960E2BA548B200889A19 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		DF84A05A2B9CD36C00B6601F /* UISearchBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Extension.swift"; sourceTree = "<group>"; };
 		DF89A61A2BA41CC50032CA57 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		DF90F2042C7C666800D4FD87 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		DF96128B2BA6979F00419511 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -246,6 +248,7 @@
 		DF71C9D92B999A0900D5983C = {
 			isa = PBXGroup;
 			children = (
+				DF90F2042C7C666800D4FD87 /* README.md */,
 				DF71C9F92B999A2500D5983C /* .gitignore */,
 				DF71C9E42B999A0900D5983C /* FoodyLand */,
 				DF71C9E32B999A0900D5983C /* Products */,
@@ -526,6 +529,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF90F2052C7C666800D4FD87 /* README.md in Resources */,
 				DF71C9FA2B999A2500D5983C /* .gitignore in Resources */,
 				DF71C9EF2B999A0C00D5983C /* Assets.xcassets in Resources */,
 				DF0542402B9B04EE009BC6AB /* GoogleService-Info.plist in Resources */,
