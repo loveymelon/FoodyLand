@@ -7,14 +7,6 @@
 
 import UIKit
 
-enum FileError: Error {
-    case saveError
-    case fileRemoveError
-    case fileNoExist
-    case dataError
-    case noDocument
-}
-
 typealias FileResult = Result<Void, FileError>
 
 extension UIViewController {

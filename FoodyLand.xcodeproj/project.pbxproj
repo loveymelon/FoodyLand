@@ -21,6 +21,9 @@
 		DF3D88742B99A2460000C3C9 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = DF3D88732B99A2460000C3C9 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		DF3D88762B99A2460000C3C9 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = DF3D88752B99A2460000C3C9 /* FirebaseCrashlytics */; };
 		DF3D88782B99A2460000C3C9 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DF3D88772B99A2460000C3C9 /* FirebaseMessaging */; };
+		DF559E9B2CDC97D7009FA671 /* FLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF559E9A2CDC97D7009FA671 /* FLError.swift */; };
+		DF559E9D2CDC985D009FA671 /* RealmError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF559E9C2CDC985D009FA671 /* RealmError.swift */; };
+		DF559E9F2CDC98A2009FA671 /* FileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF559E9E2CDC98A2009FA671 /* FileError.swift */; };
 		DF6A01C92B9B51230047E4B0 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DF6A01C82B9B51230047E4B0 /* Alamofire */; };
 		DF6A01CB2B9B51C60047E4B0 /* NetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6A01CA2B9B51C60047E4B0 /* NetworkAPI.swift */; };
 		DF6A01D12B9B65640047E4B0 /* KeywordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6A01D02B9B65640047E4B0 /* KeywordModel.swift */; };
@@ -88,6 +91,9 @@
 		DF17093F2B99BF55002594AF /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		DF1709472B99E4E8002594AF /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		DF1709492B99E501002594AF /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		DF559E9A2CDC97D7009FA671 /* FLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLError.swift; sourceTree = "<group>"; };
+		DF559E9C2CDC985D009FA671 /* RealmError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmError.swift; sourceTree = "<group>"; };
+		DF559E9E2CDC98A2009FA671 /* FileError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileError.swift; sourceTree = "<group>"; };
 		DF6A01CA2B9B51C60047E4B0 /* NetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPI.swift; sourceTree = "<group>"; };
 		DF6A01D02B9B65640047E4B0 /* KeywordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordModel.swift; sourceTree = "<group>"; };
 		DF6A01D22B9B729F0047E4B0 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
@@ -195,7 +201,6 @@
 			children = (
 				DF6A01CA2B9B51C60047E4B0 /* NetworkAPI.swift */,
 				DF6A01D02B9B65640047E4B0 /* KeywordModel.swift */,
-				DF6A01D42B9B75E20047E4B0 /* NetworkError.swift */,
 				DF733C852B9D50D600CC0B93 /* NetworkManager.swift */,
 			);
 			path = Network;
@@ -224,6 +229,25 @@
 				DF05426F2B9B34B4009BC6AB /* CustomAnnotationView.swift */,
 			);
 			path = FoodyMapView;
+			sourceTree = "<group>";
+		};
+		DF559E962CDC978A009FA671 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				DF559E972CDC9791009FA671 /* Error */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		DF559E972CDC9791009FA671 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				DF559E9A2CDC97D7009FA671 /* FLError.swift */,
+				DF6A01D42B9B75E20047E4B0 /* NetworkError.swift */,
+				DF559E9C2CDC985D009FA671 /* RealmError.swift */,
+				DF559E9E2CDC98A2009FA671 /* FileError.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 		DF6F87822BAED44F00FEA418 /* WebScene */ = {
@@ -266,6 +290,7 @@
 		DF71C9E42B999A0900D5983C /* FoodyLand */ = {
 			isa = PBXGroup;
 			children = (
+				DF559E962CDC978A009FA671 /* Resource */,
 				DF83960B2BA5355300889A19 /* RealmHelper */,
 				DF836CF62B9F177B0036649C /* CustomView */,
 				DF0542712B9B4E50009BC6AB /* Network */,
@@ -581,12 +606,14 @@
 				DF6F878B2BAF018000FEA418 /* SettingView.swift in Sources */,
 				DF82E8A12B9A220900838549 /* UIView+Extension.swift in Sources */,
 				DF1709402B99BF55002594AF /* UIViewController+Extension.swift in Sources */,
+				DF559E9B2CDC97D7009FA671 /* FLError.swift in Sources */,
 				DF96128C2BA6979F00419511 /* FileManager+Extension.swift in Sources */,
 				DF7C2C132BA206560014BB21 /* FoodyMapViewModel.swift in Sources */,
 				DF7422052BA33E8C0097A5DB /* CategoryCollectionViewCell.swift in Sources */,
 				DF83960F2BA548B200889A19 /* RealmRepository.swift in Sources */,
 				DF7D469F2B9CC1B100C76C1F /* String+Extension.swift in Sources */,
 				DF01C6A92BA0732C00BBA5D3 /* MyFloatingPanelLayout.swift in Sources */,
+				DF559E9D2CDC985D009FA671 /* RealmError.swift in Sources */,
 				DF01C69A2BA0501300BBA5D3 /* CustomDetailViewModel.swift in Sources */,
 				DF6A01D12B9B65640047E4B0 /* KeywordModel.swift in Sources */,
 				DF82E89F2B9A216200838549 /* ReusableProtocol.swift in Sources */,
@@ -596,6 +623,7 @@
 				DF17094A2B99E502002594AF /* SearchViewModel.swift in Sources */,
 				DF71CA042B999AEB00D5983C /* BaseView.swift in Sources */,
 				DF6F87842BAED47000FEA418 /* WebViewController.swift in Sources */,
+				DF559E9F2CDC98A2009FA671 /* FileError.swift in Sources */,
 				DF8335652BAF3D8A00E0DE6E /* TabBarEnum.swift in Sources */,
 				DF733C802B9D46BA00CC0B93 /* SearchView.swift in Sources */,
 				DF836CF02B9E17A90036649C /* CustomDetailView.swift in Sources */,

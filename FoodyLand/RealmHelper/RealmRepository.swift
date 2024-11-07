@@ -8,14 +8,6 @@
 import Foundation
 import RealmSwift
 
-enum RealmError: Error {
-    case createFail
-    case updateFail
-    case deleteFail
-    case noData
-    case unknownError
-}
-
 typealias RealmResult = Result<Void, RealmError>
 
 class RealmRepository {
