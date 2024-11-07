@@ -14,11 +14,11 @@ class CategoryPlusCollectionViewCell: UICollectionViewCell {
     var categoryViewModel: CategoryViewModel?
     
     let plusImageView = UIImageView().then {
-        $0.image = UIImage(systemName: "plus")
+        $0.image = UIImage(systemName: FLImage.plus)
     }
     
     let plusLabel = UILabel().then {
-        $0.text = "새 카테고리"
+        $0.text = FLText.newCategory
     }
     
     let plusTextField = UITextField().then {

@@ -15,7 +15,7 @@ final class CustomDetailView: BaseView {
     let marketDetailView = MarketDetailView()
     
     private let starLabel = UILabel().then {
-        $0.text = "별점"
+        $0.text = FLText.star
         $0.textAlignment = .center
         $0.font = .boldSystemFont(ofSize: 20)
     }
@@ -24,7 +24,7 @@ final class CustomDetailView: BaseView {
         $0.settings.fillMode = .full
         $0.settings.starSize = 30
         $0.settings.starMargin = 5
-        $0.text = "3"
+        $0.text = FLText.starCount
         $0.settings.starMargin = 10
         $0.settings.filledImage = .rice
         $0.settings.emptyImage = .dish
@@ -64,7 +64,7 @@ final class CustomDetailView: BaseView {
     }()
     
     let categoryLabel = UILabel().then {
-        $0.text = "카테고리"
+        $0.text = FLText.category
     }
     
     private let calendarStackView = UIStackView().then {
@@ -82,7 +82,7 @@ final class CustomDetailView: BaseView {
     }
     
     private let memoLabel = UILabel().then {
-        $0.text = "메모"
+        $0.text = FLText.memo
     }
     
     let memoTextView = UITextView().then {
@@ -95,7 +95,7 @@ final class CustomDetailView: BaseView {
     
     let saveButton: UIButton = {
         var buttonConfig = UIButton.Configuration.filled()
-        buttonConfig.title = "저장"
+        buttonConfig.title = FLText.save
         buttonConfig.baseBackgroundColor = .customOrange
         let button = UIButton(configuration: buttonConfig)
         

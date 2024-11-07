@@ -24,7 +24,6 @@ final class FoodyMapViewController: BaseViewController<FoodyMapView> {
         super.viewDidLoad()
         
         checkDeviceLocationAuthorization()
-//        foodyMapViewModel.inputViewDidLoadTrigger.value = ()
     }
     
     override func viewWillAppear(_ animated: Bool) {

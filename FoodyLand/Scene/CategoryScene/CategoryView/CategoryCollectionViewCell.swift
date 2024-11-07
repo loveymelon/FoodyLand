@@ -12,7 +12,7 @@ import SnapKit
 class CategoryCollectionViewCell: UICollectionViewCell {
     
     let categoryImageView = UIImageView().then {
-        $0.image = UIImage(systemName: "circle")
+        $0.image = UIImage(systemName: FLImage.circle)
     }
     
     let categoryLabel = UILabel()
@@ -67,12 +67,10 @@ extension CategoryCollectionViewCell: ConfigureUIProtocol {
 
 extension CategoryCollectionViewCell {
     func selectCell() {
-        self.categoryImageView.image = UIImage(systemName: "circle.inset.filled")
-        print(self.isSelected)
+        self.categoryImageView.image = UIImage(systemName: FLImage.circleInFill)
     }
     
     func deSelectCell() {
-        self.categoryImageView.image = UIImage(systemName: "circle")
-        print(self.isSelected)
+        self.categoryImageView.image = UIImage(systemName: FLImage.circle)
     }
 }

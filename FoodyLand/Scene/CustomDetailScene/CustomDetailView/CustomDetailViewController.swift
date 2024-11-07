@@ -55,7 +55,7 @@ final class CustomDetailViewController: BaseViewController<CustomDetailView> {
             customDetailViewModel.inputUserImageCount.value = userImages.count
             
             if customDetailViewModel.outputImageOverBool.value {
-                self.view.makeToast("사진은 최대 3개까지입니다. 삭제해주세요!" , duration: 1, position: .center)
+                self.view.makeToast(FLText.toast , duration: 1, position: .center)
                 return
             }
             openPhotoLibrary()
@@ -119,7 +119,7 @@ final class CustomDetailViewController: BaseViewController<CustomDetailView> {
             mainView.marketDetailView.marketAddLabel.text = result.address
             mainView.calendarLabel.text = result.date.toString()
             mainView.memoTextView.text = result.memo
-            mainView.categoryLabel.text = result.category?.categoryName ?? "카테고리"
+            mainView.categoryLabel.text = result.category?.categoryName ?? FLText.category
         }
         
         customDetailViewModel.outputCalendarData.bind { [weak self] result in

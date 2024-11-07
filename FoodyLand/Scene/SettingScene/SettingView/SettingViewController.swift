@@ -31,7 +31,7 @@ class SettingViewController: BaseViewController<SettingView> {
         super.configureNav()
         
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "Setting"
+        navigationItem.title = FLText.settingTitle
     }
     
     override func bindData() {
@@ -51,7 +51,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingCell") else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: FLCellName.settingCell) else { return UITableViewCell() }
         
         cell.accessoryType = .disclosureIndicator
         

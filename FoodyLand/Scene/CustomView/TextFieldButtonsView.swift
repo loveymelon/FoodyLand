@@ -12,7 +12,7 @@ class TextFieldButtonsView: BaseView {
     
     let checkButton: UIButton = {
         var buttonConfig = UIButton.Configuration.plain()
-        buttonConfig.image = UIImage(systemName: "checkmark.circle")
+        buttonConfig.image = UIImage(systemName: FLImage.checkmarkCircle)
         let button = UIButton(configuration: buttonConfig)
         button.tintColor = .black
         return button
@@ -20,7 +20,7 @@ class TextFieldButtonsView: BaseView {
     
     let cancelButton: UIButton = {
         var buttonConfig = UIButton.Configuration.plain()
-        buttonConfig.image = UIImage(systemName: "xmark.circle")
+        buttonConfig.image = UIImage(systemName: FLImage.xmarkCircle)
         let button = UIButton(configuration: buttonConfig)
         button.tintColor = .black
         return button

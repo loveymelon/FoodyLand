@@ -12,7 +12,7 @@ import SnapKit
 class SettingView: BaseView {
     
     let tableView = UITableView(frame: .zero, style: .plain).then {
-        $0.register(UITableViewCell.self, forCellReuseIdentifier: "SettingCell")
+        $0.register(UITableViewCell.self, forCellReuseIdentifier: FLCellName.settingCell)
         $0.separatorStyle = .none
         $0.backgroundColor = .customYellow
         $0.isScrollEnabled = false

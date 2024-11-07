@@ -23,7 +23,7 @@ final class FoodyMapView: BaseView {
     }
     
     let searchBar = UISearchBar().then {
-        $0.placeholder = "맛집 검색(상호명을 입력해주세요~!!)"
+        $0.placeholder = FLText.foodyMapSearch
         $0.setTextFieldBackground(color: .white)
         
         $0.searchTextField.layer.shadowColor = UIColor.black.cgColor
@@ -31,8 +31,6 @@ final class FoodyMapView: BaseView {
         $0.searchTextField.layer.shadowOffset = CGSize(width: 2, height: 2)
         $0.searchTextField.layer.shadowRadius = 5
     }
-    
-//    var longPressClosure: ((CLLocationCoordinate2D) -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

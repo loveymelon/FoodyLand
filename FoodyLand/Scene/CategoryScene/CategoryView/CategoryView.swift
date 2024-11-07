@@ -22,26 +22,26 @@ class CategoryView: BaseView {
     }
     
     let categoryLabel = UILabel().then {
-        $0.text = "카테고리"
+        $0.text = FLText.category
     }
     
     let checkButton: UIButton = {
         var buttonConfig = UIButton.Configuration.plain()
-        buttonConfig.title = "저장"
+        buttonConfig.title = FLText.save
         let button = UIButton(configuration: buttonConfig)
         return button
     }()
     
     let cancelButton: UIButton = {
         var buttonConfig = UIButton.Configuration.plain()
-        buttonConfig.title = "취소"
+        buttonConfig.title = FLText.cancel
         let button = UIButton(configuration: buttonConfig)
         return button
     }()
     
     let deleteButton: UIButton = {
         var buttonConfig = UIButton.Configuration.plain()
-        buttonConfig.title = "삭제"
+        buttonConfig.title = FLText.delete
         let button = UIButton(configuration: buttonConfig)
         button.setTitleColor(.red, for: .normal)
         

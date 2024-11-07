@@ -34,7 +34,7 @@ final class SearchViewController: BaseViewController<SearchView> {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationItem.title = "맛집 검색"
+        navigationItem.title = FLText.searchNavTitle
     }
 
     override func configureNav() {
@@ -71,7 +71,7 @@ final class SearchViewController: BaseViewController<SearchView> {
                 
                 mainView.noDataView.isHidden = false
                 mainView.collectionView.isHidden = true
-                mainView.noDataLabel.text = "\(text)의 검색 결과가 없습니다."
+                mainView.noDataLabel.text = searchViewModel.searchNoData(text)
             }
         }
     }
@@ -80,7 +80,7 @@ final class SearchViewController: BaseViewController<SearchView> {
 
 extension SearchViewController {
     private func setupSearchController() {
-        searchController.searchBar.placeholder = "맛집 검색(상호명을 입력해주세요~!!)"
+        searchController.searchBar.placeholder = FLText.foodyMapSearch
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.showsCancelButton = false
     }

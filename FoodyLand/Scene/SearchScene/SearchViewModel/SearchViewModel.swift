@@ -40,6 +40,13 @@ final class SearchViewModel {
         }
     }
     
+    func searchNoData(_ text: String) -> String {
+        return text + FLText.searchNoDataText
+    }
+    
+}
+
+extension SearchViewModel {
     private func checkValue(text: String?, page: Int = 1) {
         guard let text = text else { return }
 //        self.outputText.value = text.matchString(text: text)
@@ -73,5 +80,4 @@ final class SearchViewModel {
         outputLocation.value.latitude = latitude
         outputLocation.value.longitude = longitude
     }
-    
 }
