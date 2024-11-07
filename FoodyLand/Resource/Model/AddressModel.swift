@@ -1,16 +1,11 @@
 //
-//  KeywordModel.swift
+//  AddressModel.swift
 //  FoodyLand
 //
-//  Created by 김진수 on 3/9/24.
+//  Created by 김진수 on 11/7/24.
 //
 
 import Foundation
-
-struct KeywordModel: Decodable {
-    let documents: [Address]
-    let meta: PageData
-}
 
 struct Address: Hashable, Decodable {
     let id = UUID() // 값이 같을때의 충돌을 막기위해서
@@ -33,22 +28,4 @@ struct Address: Hashable, Decodable {
         case x
         case y
     }
-}
-
-struct PageData: Decodable {
-    let isEnd: Bool
-    let pageableCount: Int
-    let total: Int
-    let sameName: NameData
-    
-    enum CodingKeys: String, CodingKey {
-        case isEnd = "is_end"
-        case pageableCount = "pageable_count"
-        case total = "total_count"
-        case sameName = "same_name"
-    }
-}
-
-struct NameData: Decodable {
-    let keyword: String
 }
