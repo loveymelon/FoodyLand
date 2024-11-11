@@ -9,5 +9,8 @@ import Foundation
 
 enum FLError {
     case networkError(NetworkError)
-    case unowned
+    case realmError(RealmError)
+    case fileError(FileError)
+    case unowned(Error)
+    case none
 }

@@ -35,6 +35,7 @@
 		DF6A01CB2B9B51C60047E4B0 /* NetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6A01CA2B9B51C60047E4B0 /* NetworkAPI.swift */; };
 		DF6A01D32B9B72A00047E4B0 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6A01D22B9B729F0047E4B0 /* APIKey.swift */; };
 		DF6A01D52B9B75E20047E4B0 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6A01D42B9B75E20047E4B0 /* NetworkError.swift */; };
+		DF6CEB692CE1EFE300131E69 /* ErrorHandleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6CEB682CE1EFE300131E69 /* ErrorHandleManager.swift */; };
 		DF6F87842BAED47000FEA418 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F87832BAED47000FEA418 /* WebViewController.swift */; };
 		DF6F87862BAED96200FEA418 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F87852BAED96200FEA418 /* WebView.swift */; };
 		DF6F87892BAF017200FEA418 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6F87882BAF017200FEA418 /* SettingViewController.swift */; };
@@ -110,6 +111,7 @@
 		DF6A01CA2B9B51C60047E4B0 /* NetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPI.swift; sourceTree = "<group>"; };
 		DF6A01D22B9B729F0047E4B0 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		DF6A01D42B9B75E20047E4B0 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		DF6CEB682CE1EFE300131E69 /* ErrorHandleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandleManager.swift; sourceTree = "<group>"; };
 		DF6F87832BAED47000FEA418 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		DF6F87852BAED96200FEA418 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		DF6F87882BAF017200FEA418 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 			isa = PBXGroup;
 			children = (
 				DF733C852B9D50D600CC0B93 /* NetworkManager.swift */,
+				DF6CEB682CE1EFE300131E69 /* ErrorHandleManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -661,6 +664,7 @@
 				DF89A61B2BA41CC50032CA57 /* UITextField+Extension.swift in Sources */,
 				DF6F87862BAED96200FEA418 /* WebView.swift in Sources */,
 				DF733C822B9D46C600CC0B93 /* SearchViewController.swift in Sources */,
+				DF6CEB692CE1EFE300131E69 /* ErrorHandleManager.swift in Sources */,
 				DF559EC72CDCB0FF009FA671 /* FLCellName.swift in Sources */,
 				DF559EAC2CDC9DD9009FA671 /* PageModel.swift in Sources */,
 				DF6F878B2BAF018000FEA418 /* SettingView.swift in Sources */,
