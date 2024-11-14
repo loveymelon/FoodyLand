@@ -64,15 +64,15 @@ final class SearchViewController: BaseViewController<SearchView> {
         
         searchViewModel.outputError.bind { [weak self] result in
             guard let self else { return }
-            guard let error = result else { return }
+//            guard let error = result else { return }
             
-            if error == .invalidStatusCode(200) {
+//            if error == .networkError(.invalidStatusCode(200)) {
                 guard let text = searchController.searchBar.text else { return }
                 
                 mainView.noDataView.isHidden = false
                 mainView.collectionView.isHidden = true
                 mainView.noDataLabel.text = searchViewModel.searchNoData(text)
-            }
+//            }
         }
     }
     

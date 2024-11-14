@@ -10,7 +10,7 @@ import RealmSwift
 
 class CategoryViewModel {
     let outputCategoryData: Observable<[CategoryData]?> = Observable(nil)
-    let outputError: Observable<RealmError> = Observable(.unknownError)
+    let outputError: Observable<FLError> = Observable(.none)
     
     let inputCategoryData: Observable<String> = Observable("")
     let inputViewDidLoadTrigger: Observable<Void?> = Observable(nil)
@@ -63,7 +63,7 @@ class CategoryViewModel {
             outputCategoryData.value = tempData
             
         case .failure(let failure):
-            outputError.value = failure
+            outputError.value = ErrorHandleManager.shared.errorHandle(failure)
         }
         
         
@@ -86,12 +86,12 @@ class CategoryViewModel {
                 outputCategoryData.value?.insert(CategoryData(category: sortedData[0].categoryName), at: 0) // 테이블이 업데이트 되었으니 뷰에도 업데이트 하게 해준다.
                 
             case .failure(let failure):
-                outputError.value = failure
+                outputError.value = ErrorHandleManager.shared.errorHandle(failure)
             }
             
             
         case .failure(let failure):
-            outputError.value = failure
+            outputError.value = ErrorHandleManager.shared.errorHandle(failure)
         }
         
     }
@@ -104,7 +104,7 @@ class CategoryViewModel {
             fetchCategoryDatas() // 삭제했으니 뷰에도 업데이트하기 위해서
             selectIndex = nil
         case .failure(let failure):
-            outputError.value = failure
+            outputError.value = ErrorHandleManager.shared.errorHandle(failure)
         }
         
     }
